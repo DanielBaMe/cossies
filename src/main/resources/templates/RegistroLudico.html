@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Red de apoyo</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Red de apoyo</li>
+                        </ol>
+
+                        <div class="card-mb-4">
+                            <div class="justify-content-center">
+                                <div class="col-mb-4">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-3">
+                                        <div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos del niño/a</h3>
+										</div>
+                                        <div class="card-body">
+                                        <form th:action="@{/registro_ludico}" method="post" th:object="${rludico}">
+
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="nombre">Nombre</label>
+                                                        <input type="text" name="nombre" th:field="*{nombre}" autocomplete="off" required/>
+                                                        <small th:if="${#fields.hasErrors('nombre')}" class="text-danger" th:errors="*{nombre}">Error nombre</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="dom">Domicilio</label>
+                                                        <input type="text" name="dom" th:field="*{dom}" autocomplete="off" required/>
+                                                        <small th:if="${#fields.hasErrors('dom')}" class="text-danger" th:errors="*{dom}">Error nombre</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ocup">Ocupación</label>
+                                                        <input type="text" name="ocup" th:field="*{ocup}" autocomplete="off" required/>
+                                                        <small th:if="${#fields.hasErrors('ocup')}" class="text-danger" th:errors="*{ocup}">Error nombre</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="edad">Edad</label>
+                                                        <input type="text" name="edad" th:field="*{edad}" autocomplete="off" required/>
+                                                        <small th:if="${#fields.hasErrors('edad')}" class="text-danger" th:errors="{edad}">Error nombre</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+
+                                            <div class="form-group mt-4 mb-0">
+                                                <button type="submit" class="btn btn-save btn-block">
+                                                    <i class="fas fa-save"></i> Agregar
+                                                </button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla :: footer">
+
+            </footer>
+        </div>
+    </div>
+    <th:block th:replace="layout/plantilla::script"></th:block>  
+</body>
+</html>

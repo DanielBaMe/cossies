@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+						<h1 class="mt-4">Nivel de riesgo</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Nivel de riesgo</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3>
+										</div>
+										<div class="card-body">
+										    <form th:action="@{/nivel_riesgo}" method="post" th:object="${riesgo}">
+												
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="efecto_droga" class="small mb-1">Sientes que tu pareja constantemente te está controlando?</label>
+															
+															<input type="hidden" th:field="*{expediente}">
+															<input type="hidden"  th:field="*{fecha}">
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="sipareja" id="sipareja" th:field="*{pareja}"
+																	value="3"> <label class="form-check-label"
+																	for="sipareja"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="vecespareja" id="vecespareja" th:field="*{pareja}"
+																	value="2"> <label class="form-check-label"
+																	for="vecespareja"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="rarapareja" id="rarapareja" th:field="*{pareja}"
+																	value="1"> <label class="form-check-label"
+																	for="rarapareja"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="nuncapareja" id="nuncapareja" th:field="*{pareja}"
+																	value="0"> <label class="form-check-label"
+																	for="nuncapareja"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="frecuencia_consumo" class="small mb-1">Te acusa de infidelidad o de que actúas en forma sospechosa?</label>
+															
+															
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{infidelidad}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{infidelidad}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{infidelidad}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{infidelidad}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="cual" class="small mb-1">Has perdido contacto con amigas, familiares, compañeras/os de trabajo para eivtar que tu pareja de moleste?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{contacto}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{contacto}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{contacto}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{contacto}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Te critican y humilla, en público o en privado, sobre tu apariencia, tú forma de ser, el modo en que haces tus tareas hogareñas?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{critican}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{critican}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{critican}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{critican}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Controla estrictamente tus ingresos o el dinero que te entrega, originando discusiones?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{controla}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{controla}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="raracontrola" id="raracontrola" th:field="*{controla}"
+																	value="1"> <label class="form-check-label"
+																	for="raracontrola"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="nuncacontrola" id="nuncacontrola" th:field="*{controla}"
+																	value="0"> <label class="form-check-label"
+																	for="nuncacontrola"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Cuando quiere que cambies de comportamiento, te presiona con el silenciona, con la indiferenciado te priva de dinero?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="sicomportamiento" id="sicomportamiento" th:field="*{comportamiento}"
+																	value="3"> <label class="form-check-label"
+																	for="sicomportamiento"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="vecescomportamiento" id="vecescomportamiento" th:field="*{comportamiento}"
+																	value="2"> <label class="form-check-label"
+																	for="vecescomportamiento"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="raracomportamiento" id="raracomportamiento" th:field="*{comportamiento}"
+																	value="1"> <label class="form-check-label"
+																	for="raracomportamiento"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="nuncacomportamiento" id="nuncacomportamiento" th:field="*{comportamiento}"
+																	value="0"> <label class="form-check-label"
+																	for="nuncacomportamiento"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Tiene tu pareja cambios bruscos de humor o se comporta distinto contigo en público, como si fuera otra persona?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{humor}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{humor}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{humor}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{humor}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Sientes que estas en permanente tensión y que, hagas lo que hagas, él se irrita o te culpabiliza?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{tension}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{tension}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{tension}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{tension}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Te ha golpeado con sus manos, con un objeto o te ha lanzado cosas cuando se enoja o discuten?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{golpeado}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{golpeado}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{golpeado}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{golpeado}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Te ha amenazado alguna vez con un objeto o arma, o con matarse él, a ti o algún miembro de la familia?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{amenazado}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{amenazado}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{amenazado}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{amenazado}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Sientes que cedes a sus requerimientos sexuales por temos o te ha forzado a tener relaciones sexuales?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{sexuales}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{sexuales}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{sexuales}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{sexuales}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Después de un episodio violento, él se muestra cariñoso y atento, te regala cosas, y te promete que nunca más volverá a golpear o insultarte y que "todo cambiará"?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="siepisodio" id="siepisodio" th:field="*{episodio}"
+																	value="3"> <label class="form-check-label"
+																	for="siepisodio"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="raraepisodio" id="raraepisodio" th:field="*{episodio}"
+																	value="2"> <label class="form-check-label"
+																	for="raraepisodio"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="raraepisodio" id="raraepisodio" th:field="*{episodio}"
+																	value="1"> <label class="form-check-label"
+																	for="raraepisodio"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="nuncaepisodio" id="nuncaepisodio" th:field="*{episodio}"
+																	value="0"> <label class="form-check-label"
+																	for="nuncaepisodio"> Nunca </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Ha sido necesario llamar a la policia o lo has intentado al sentir que tu vida y la de los tuyos han sido puestas en peligro por tu pareja?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{policia}"
+																	value="3"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{policia}"
+																	value="2"> <label class="form-check-label"
+																	for="escribir"> A veces </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{policia}"
+																	value="1"> <label class="form-check-label"
+																	for="escribir"> Rara vez </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{policia}"
+																	value="0"> <label class="form-check-label"
+																	for="escribir"> Nunca </label>
+															</div>
+														</div>
+													</div>
+
+												</div>
+												
+										
+										
+										        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+										    </form>
+    									</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

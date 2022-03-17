@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+<header th:replace="layout/plantilla :: header">
+</header>
+    <div id="layoutSidenav">
+      <div th:replace="layout/plantilla::aside">
+              
+      </div>
+      <div id="layoutSidenav_content">
+          <div id="layoutAuthentication_content">
+            <main>
+            	<div class="container-fluid">
+					<h1 class="mt-4">Valoración infantil</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+						<li class="breadcrumb-item active">Valoración infantil</li>
+					</ol>
+					
+					<div class="col-mb-4">
+					<div class="justify-content-center">
+						<div class="col-mb-4">
+							<div class="card shadow-lg border-0 rounded-lg mt-3">
+								<div class="card-header">
+									<h3 class="text-center font-weight-light my-2" id="preHeader">Datos de la valoración</h3>
+								</div>
+								<div class="card-body">
+							        <form th:action="@{/valoracion_infantil}" method="post" th:object="${valoracion}">
+							            
+							            <div class="form-row">
+							            	<div class="col-md-4">
+							            		<div class="form-group">
+							            			<label for="nombre" class="small mb-1">Nombre y apellidos</label>
+										            <input type="text" name="nombre" th:field="*{nombre}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+										            class="form-control form-control-sm" required autocomplete="off"/>
+										            <small th:if="${#fields.hasErrors('nombre')}" class="text-danger" th:errors="*{nombre}">Error nombre</small>
+							            		</div>
+							            	</div>
+							            	<div class="col-md-4">
+							            		<div class="form-group">
+							            		<label for="edad" class="small mb-1">Edad</label>
+									            <input type="number" name="edad" th:field="*{edad}" class="form-control form-control-sm" autocomplete="off" required/>
+									            <small th:if="${#fields.hasErrors('edad')}" class="text-danger" th:errors="*{edad}">Error nombre</small>
+							            		</div>
+							            	</div>
+							            	<div class="col-md-4">
+							            		<div class="form-group">
+							            			<label for="ocupacion" class="small mb-1">Ocupación</label>
+													<input type="text" name="telefono" th:field="*{ocupacion}" autocomplete="off"
+													class="form-control form-control-sm" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="3" maxlength="20" required/>
+										            <small th:if="${#fields.hasErrors('ocupacion')}" class="text-danger" th:errors="*{ocupacion}">Error nombre</small>
+							            		</div>
+							            	</div>
+							            	
+							            </div>
+							            
+							            <div class="form-row">
+							            	<div class="col-md-4">
+							            		<div class="form-group">
+							            		 <label for="estudios" class="small mb-1">Grado de estudios</label>
+												<input type="text" name="estudios" th:field="*{estudios}" autocomplete="off"
+												class="form-control form-control-sm" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required/>
+									            <small th:if="${#fields.hasErrors('estudios')}" class="text-danger" th:errors="*{estudios}">Error nombre</small>
+							            		</div>
+							            	</div>
+							            	<div class="col-md-4">
+							            		<div class="form-group">
+							            			<label for="religion" class="small mb-1">Religión</label>
+													<input type="text" name="religion" th:field="*{religion}" autocomplete="off"
+													class="form-control form-control-sm" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"/>
+										            <small th:if="${#fields.hasErrors('religion')}" class="text-danger" th:errors="*{religion}">Error nombre</small>
+							            		</div>
+											</div>
+											<div class="col-md-4">
+							            		<div class="form-group">
+							            			<label for="motivo" class="small mb-1">Motivo de la consulta</label>
+													<input type="text" name="motivo" th:field="*{motivo}" autocomplete="off"
+													class="form-control form-control-sm" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"/>
+										            <small th:if="${#fields.hasErrors('motivo')}" class="text-danger" th:errors="*{motivo}">Error nombre</small>
+							            		</div>
+							            	</div>
+							            </div>
+
+							            
+							            <h4>Tipo de violencia</h4>
+							            <div class="form-group">
+							            	<div class="form-row">
+							            		<div class="col-md-4">
+							            			<div class="custom-control custom-checkbox">
+							            				<input type="checkbox" class="custom-control-input"  id="fisica" th:field="*{tipo_violencia}" value="fisica"/>
+								            			<label class="custom-control-label" for="fisica">Fisica</label>
+								            			
+								            		</div>
+								            	</div>
+								            	<div class="col-md-4">
+								            		<div class="custom-control custom-checkbox">
+								            			<input type="checkbox" class="custom-control-input"  id="psicologica" th:field="*{tipo_violencia}" value="psicologica"/>
+								            			<label class="custom-control-label" for="psicologica">Psicologica</label>
+								            			
+								            		</div>
+								            	</div>
+	
+								            	<div class="col-md-4">
+								            		<div class="custom-control custom-checkbox">
+								            			<input type="checkbox" class="custom-control-input"  id="sexual" th:field="*{tipo_violencia}" value="sexual"/>
+								            			<label class="custom-control-label" for="sexual">Sexual</label>
+							            				
+									            	</div>
+								            	</div>
+								            	
+								            	<div class="col-md-4">
+								            		<div class="custom-control custom-checkbox">
+								            			<input type="checkbox" class="custom-control-input"  id="economica" th:field="*{tipo_violencia}" value="economica"/>
+									            		<label class="custom-control-label" for="economica">Economica</label>
+									            		
+								            		</div>
+								            	</div>
+								            	<div class="col-md-4">
+								            		<div class="custom-control custom-checkbox">
+								            			<input type="checkbox" class="custom-control-input" id="patrimonial" th:field="*{tipo_violencia}" value="patrimonial"/>
+								            			<label class="custom-control-label" for="patrimonial">Patrimonial</label>
+								            			
+								            		</div>
+								            	</div>
+								            	<div class="col-md-4">
+								            		<div class="custom-control custom-checkbox">
+								            			<input type="checkbox"  class="custom-control-input" id="feminicida" th:field="*{tipo_violencia}" value="feminicida"/>
+								            			<label class="custom-control-label" for="feminicida">Cibernético</label>
+								            			
+								            		</div>
+								            	</div>
+							            	</div>
+							            	
+							            </div>
+							            <small th:if="${#fields.hasErrors('tipo_violencia')}" class="text-danger" th:errors="*{tipo_violencia}">Error nombre</small>
+										
+										<div class="form-row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="tarea" class="small mb-1">Tarea</label>
+													<input type="text" class="form-control" name="tarea" autocomplete="off" th:field="*{tarea}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" />
+													<small th:if="${#fields.hasErrors('tarea')}" class="text-danger" th:errors="*{tarea}">Error nombre</small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="observacion" class="small mb-1">Observacion</label>
+													<input type="text" class="form-control" name="observacion" autocomplete="off" th:field="*{observacion}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" />
+													<small th:if="${#fields.hasErrors('observacion')}" class="text-danger" th:errors="*{observacion}">Error nombre</small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="dx" class="small mb-1">DX</label>
+													<input type="text" class="form-control" name="dx" autocomplete="off" th:field="*{dx}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" />
+													<small th:if="${#fields.hasErrors('dx')}" class="text-danger" th:errors="*{dx}">Error nombre</small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="objetivo" class="small mb-1">Objetivo</label>
+													<input type="text" class="form-control" name="objetivo" autocomplete="off" th:field="*{objetivo}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" />
+													<small th:if="${#fields.hasErrors('objetivo')}" class="text-danger" th:errors="*{objetivo}">Error nombre</small>
+												</div>
+											</div>
+										</div>
+							            
+							            <div class="form-group">
+							            	<label for="psicologa" class="small mb-1">Psicologa</label>
+								            <input type="text" class="form-control" name="psicologa" autocomplete="off" th:field="*{psicologa}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" />
+								            <small th:if="${#fields.hasErrors('psicologa')}" class="text-danger" th:errors="*{psicologa}">Error nombre</small>
+							            </div>
+							
+							            
+							            <input type="hidden" name="usuaria" th:field="*{usuaria}"/>
+							            
+							            <div class="form-group mt-4 mb-0">
+											<button type="submit" class="btn btn-save btn-block">
+												<i class="fas fa-save"></i> Agregar
+											</button>
+											
+										</div>
+							        </form>
+        						</div>
+        					</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </main>
+        <br>
+        </div>
+        <footer th:replace="layout/plantilla :: footer">
+
+        </footer>
+        </div>
+    </div>
+     <th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla::header">
+	</header>
+	<div id="layoutSidenav">
+		<div th:replace="layout/plantilla::aside">
+			
+		</div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<div class="container-fluid">
+						<h1 class="mt-4">Nuevo Domicilio</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Domicilio</li>
+						</ol>
+						
+						<div class="card-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Domicilio de
+												la usuaria</h3>
+										</div>
+										<div class="card-body">
+											<form method="post" th:action="@{/nuevo_dom_usuaria}" th:object="${nuevo}">
+											<input type="hidden" th:field="*{usuaria}" >
+												<!-- <div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Nombre
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="nombre"
+																th:field="*{nombre}" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" 
+																minlength="4" placeholder="Nombre" autocomplete="off" />
+															<small th:if="${#fields.hasErrors('nombre')}" class="text-danger" th:errors="*{nombre}">Error nombre</small>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputLastName1">Apellido
+																Paterno </label> <input
+																class="form-control form-control-sm py-4"
+																id="inputLastName1" type="text"
+																placeholder="Apellido Paterno"
+																name="apellidoP" th:field="*{paterno}" 
+																required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="4" autocomplete="off"/>
+															<small th:if="${#fields.hasErrors('paterno')}" class="text-danger" th:errors="*{paterno}">Error apellido</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group"> 
+															<label class="small mb-1" for="inputLastName2">Apellido
+																Materno </label> <input
+																class="form-control form-control-sm py-4"
+																id="inputLastName2" type="text"
+																placeholder="Apellido Materno" name="apellidoM" autocomplete="off"
+																th:field="*{materno}"  required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="4"/>
+															<small th:if="${#fields.hasErrors('materno')}" class="text-danger" th:errors="*{materno}">Error email</small>
+														</div>
+													</div>
+												</div> -->
+	
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="selectEntidadFederativa">Entidad
+																Federativa </label> <select
+																class="form-control form-control-sm"
+																id="selectEntidadFederativa" name="estado" th:field="*{estado}">
+																<option th:value="Tlaxcala">Tlaxcala</option>
+																<option th:value="CDMX">CDMX</option>
+																<option th:value="Oaxaca">Oaxaca</option>
+																<option th:value="Puebla">Puebla</option>
+																<option th:value="Hidalgo">Hidalgo</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="selectMunicipio">Municipio
+															</label> <select class="form-control form-control-sm"
+																id="selectMunicipio" name="municipio" th:field="*{municipio}">
+																<option th:value="Apizaco">Apizaco</option>
+																<option th:value="Tlaxcala">Tlaxcala</option>
+																<option th:value="Huamantla">Huamantla</option>
+																<option th:value="Apetatilan">Apetatilan</option>
+																<option th:value="Ixtacuixtla">Ixtacuixtla</option>
+															</select>
+															<span th:if="${#fields.hasErrors('municipio')}" class="text-danger" th:errors="*{municipio}">Error nombre</span>
+														</div>
+													</div>
+													<!-- <div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="selectLocalidad">Localidad
+															</label> <select class="form-control form-control-sm py-4"
+																id="selectLocalidad">
+																<option></option>
+															</select>
+														</div>
+													</div> -->
+												</div>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputCalle">Calle</label>
+															<input class="form-control form-control-sm py-4"
+																id="inputCurp" type="text" placeholder="Calle" autocomplete="off"
+																name="calle" th:field="*{calle}"  required />
+															<small th:if="${#fields.hasErrors('calle')}" class="text-danger" th:errors="*{calle}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputNoExterior">No.
+																Exterior</label> <input
+																class="form-control form-control-sm py-4" id="inputCurp" autocomplete="off"
+																type="number" placeholder="No. Exterior" name="exterior"
+																th:field="*{numero_exterior}" pattern="[0-9]+" required/>
+															 <small th:if="${#fields.hasErrors('numero_exterior')}" class="text-danger" th:errors="*{numero_exterior}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputNoInterior">No.
+																Interior</label> <input
+																class="form-control form-control-sm py-4"
+																id="inputNoInterior" type="number" autocomplete="off"
+																placeholder="No. Exterior" name="interior"
+																th:field="*{numero_interior}" pattern="[0-9]+" />
+															 <small th:if="${#fields.hasErrors('numero_interior')}" th:errors="*{numero_interior}">Error nombre</small>
+														</div>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputColonia">Colonia</label>
+															<input class="form-control form-control-sm py-4"
+																id="inputCurp" type="text" placeholder="Colonia" autocomplete="off"
+																name="colonia" th:field="*{colonia}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+																minlength="4" required />
+															<small th:if="${#fields.hasErrors('colonia')}" class="text-danger" th:errors="*{colonia}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputCP">Código
+																Postal</label> <input class="form-control form-control-sm py-4"
+																id="inputCurp" placeholder="Código Postal" type="text" autocomplete="off"
+																name="cp" th:field="*{codigo_postal}" title="Ingrese solo números"
+																required minlength="5" maxlength="5" pattern="[0-9]+"/>
+															<small th:if="${#fields.hasErrors('codigo_postal')}" class="text-danger" th:errors="*{codigo_postal}">Error nombre</small>
+														</div>
+													</div>
+													
+												</div>
+												
+												<div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				<br>
+			</div>
+			<footer th:replace="layout/plantilla::footer">
+					
+			</footer>
+		</div>
+	</div>
+	<th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>

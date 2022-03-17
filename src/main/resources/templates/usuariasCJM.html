@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+<header th:replace="layout/plantilla :: header">
+</header>
+    <div id="layoutSidenav">
+      <div th:replace="layout/plantilla::aside">
+              
+      </div>
+      <div id="layoutSidenav_content">
+          <div id="layoutAuthentication_content">
+            <main>
+            	<div class="container-fluid">
+					<h1 class="mt-4">Lista de trabajadoras</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+						<li class="breadcrumb-item active">Trabajadoras</li>
+					</ol>
+					
+					<div class="col-mb-4">
+					<div class="justify-content-center">
+						<div class="col-mb-4">
+							<div class="card shadow-lg border-0 rounded-lg mt-3">
+								<div class="card-header">
+                                    <h3 class="text-center font-weight-light my-2" id="preHeader">Trabajadoras CJM</h3>
+								</div>
+								<div class="card-body">
+                                    <div id="dataTable_wrapper"
+                                        class="dataTables_wrapper dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered dataTable"
+                                                id="dataTable" width="100%" cellspacing="0"
+                                                role="grid" aria-describedby="dataTable_info"
+                                                style="width: 100%;">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="dataTable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Nombre: activate to sort column descending">Nombre</th>
+                                                            <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="dataTable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Username: activate to sort column descending">Username</th>
+                                                            <th class="sorting_asc" tabindex="0"
+                                                            aria-controls="dataTable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Opciones: activate to sort column descending">Opciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr role="row"
+                                                        th:each="usuaria : ${usuarias}">
+                                                            <td class="sorting_1" th:text="${usuaria.nombre}"></td>
+                                                            <td th:text="${usuaria.username}"></td>
+                                                            <td><a th:href="@{/cambiar_contraseña/} + ${usuaria.idUsuario}">Cambiar contraseña</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </main>
+          </div>
+          <footer th:replace="layout/plantilla :: footer">
+
+          </footer>
+      </div>
+    </div>
+    <th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

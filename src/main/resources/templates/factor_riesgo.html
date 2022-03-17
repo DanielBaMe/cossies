@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+						<h1 class="mt-4">Factor de riesgo</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Factor de riesgo</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3>
+										</div>
+										<div class="card-body">
+										    <form th:action="@{/factor_riesgo}" method="post" th:object="${fRiesgo}">
+												
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="efecto_droga" class="small mb-1">Durante la agresion estaba bajo el efecto de alguna droga o alcohol?</label>
+															
+															
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir1" th:field="*{efecto_droga}"
+																	value="Si"> <label class="form-check-label"
+																	for="escribir"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{efecto_droga}"
+																	value="No"> <label class="form-check-label"
+																	for="escribir"> No </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="escribir2" th:field="*{efecto_droga}"
+																	value="Desconocido"> <label class="form-check-label"
+																	for="escribir"> Se desconoce </label>
+															</div>
+															
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="frecuencia_consumo" class="small mb-1">La consume de manera cotidiana?</label>
+															
+															
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="cot" th:field="*{frecuencia_consumo}"
+																	value="Si"> <label class="form-check-label"
+																	for="cot"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="cot2" th:field="*{frecuencia_consumo}"
+																	value="No"> <label class="form-check-label"
+																	for="co2"> No </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="cot3" th:field="*{frecuencia_consumo}"
+																	value="Desconocido"> <label class="form-check-label"
+																	for="co3"> Se desconoce </label>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="cual" class="small mb-1">Cual?</label>
+														
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="Alcohol" th:field="*{cual}"
+																	value="Alcohol"> <label class="form-check-label"
+																	for="Alcohol"> Alcohol </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="droga1" th:field="*{cual}"
+																	value="droga_medica"> <label class="form-check-label"
+																	for="droga1"> Droga por indicación médica </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="droga2" th:field="*{cual}"
+																	value="droga_lega"> <label class="form-check-label"
+																	for="droga2"> Drogas legales </label>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="armas" class="small mb-1">Posee algun tipo de armas?</label>
+														
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="arma" th:field="*{armas}"
+																	value="Si"> <label class="form-check-label"
+																	for="arma"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="arma2" th:field="*{armas}"
+																	value="No"> <label class="form-check-label"
+																	for="arma2"> No </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="escribir" id="arma3" th:field="*{armas}"
+																	value="Desconocido"> <label class="form-check-label"
+																	for="arma3"> Se desconoce </label>
+															</div>
+														</div>
+													</div>
+												</div>
+												
+										
+										
+										        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+										    </form>
+    									</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

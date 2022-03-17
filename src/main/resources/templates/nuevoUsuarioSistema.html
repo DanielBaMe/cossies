@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+<header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+		        <main>
+		            <div class="container-fluid">
+		                <h1 class="mt-4">Administración de usuarios</h1>
+		                <ol class="breadcrumb mb-4">
+		                    <li class="breadcrumb-item active">Administración de usuarios</li>
+		                </ol>
+		                <div class="container">
+		                    <div class="row justify-content-center">
+		                        <div class="col-lg-9">
+		                            <div class="card shadow-lg border-0 rounded-lg mt-3">
+		                                <div class="card-header bg-purple">
+		                                    <h3 class="text-center font-weight-light text-light my-2">Nuevo usuario</h3>
+		                                </div>
+		                                <div class="card-body">
+		                                    <form th:action="@{/new_user}" method="post" th:object="${usuario}" >
+		
+		                                        <div class="form-group">
+		                                            <label class="small mb-1" for="nombre">Nombre completo </label>
+													<input class="form-control form-control-sm py-4" autocomplete="off"
+													type="text" name="nombre" th:field="*{nombre}"  required/>
+		                                            <small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger">Error nombre</small>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label class="small mb-1" for="username">Nombre de usuario</label>
+													<input class="form-control form-control-sm py-4" autocomplete="off"
+													type="text" name="username" th:field="*{username}"  required/>
+		                                            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger">Error nombre</small>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label class="small mb-1" for="password">Contraseña </label>
+		                                            <input class="form-control form-control-sm py-4" type="password" name="password" th:field="*{password}"  required/>
+		                                            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Error nombre</small>
+		                                        </div>
+		
+		                                        <div class="form-group">
+		                                            <label class="small mb-1" for="rol">Rol/Área</label>
+		                                            <select class="form-control form-control-sm" id="rol" th:field="*{rol}" >
+		                                                <option th:value="ROLE_ADMIN">Directora</option>
+		                                                <option th:value="ROLE_JTS">Jefa Área Trabajo Social</option> 
+		                                                <option th:value="ROLE_JJUD">Jefa Área Jurídica</option>
+		                                                <option th:value="ROLE_JLUD">Jefa Área Lúdico</option>
+		                                                <option th:value="ROLE_JPSIC">Jefa Área Psicología</option>
+														<option th:value="ROLE_JEMP">Jefa Área Empoderamiento</option>
+														<option th:value="ROLE_JMP">Jefa Ministerio Público</option>
+		                                                <option th:value="ROLE_TS">Área Trabajo Social</option>
+		                                                <option th:value="ROLE_JUD">Área Jurídica</option>                                               
+		                                                <option th:value="ROLE_LUD">Área Lúdico</option>                                               
+		                                                <option th:value="ROLE_PSIC">Área Psicología</option>                                                  
+														<option th:value="ROLE_EMP">Área Empoderamiento</option>
+														<option th:value="ROLE_MP">Ministerio Público</option>
+		                                            </select>
+		                                        </div>
+		                                        <div class="form-group mt-4 mb-0 text-right">
+		                                            <button type="submit" class="btn btn-secondary">
+		                                                 Cancelar
+		                                            </button>
+		                                            <button type="submit" class="btn btn-save">
+		                                                <i class="fas fa-save"></i> Agregar
+		                                            </button>
+		                                        </div>
+		                                    </form>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </main>
+				<br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block>
+           
+</body>
+</html>

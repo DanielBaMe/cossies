@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla::header">
+	</header>
+	<div id="layoutSidenav">
+		<div th:replace="layout/plantilla::aside">
+			
+		</div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<div class="container-fluid">
+					<input type="hidden" th:field="*{usuaria}"/>
+						<div class="row">
+							<div class="col-md-4">
+
+							</div>
+							<div class="col-md-4">
+								<div class="row">
+									<a class="btn btn-push" th:href="@{/editar_info_usuaria/} + ${usuaria}">Información básica de la usuaria</a>
+									<a class="btn btn-push" th:href="@{/editar_agresor_datos/} + ${usuaria}">Datos del agresor</a>
+									<a class="btn btn-push" th:href="@{/editar_domAg/} + ${usuaria}">Domicilio del agresor</a>
+								</div>
+							</div>
+							<div class="col-md-4">
+
+							</div>
+							
+						</div>
+					</div>
+				</main>
+				<br>
+			</div>
+			<footer th:replace="layout/plantilla::footer">
+					
+			</footer>
+		</div>
+	</div>
+
+
+<th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>

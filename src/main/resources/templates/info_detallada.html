@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla :: header"> </header>
+	<div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+						<h1 class="mt-4">Datos de la usuaria</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item">Inicio</li>
+							<li class="breadcrumb-item">Perfil</li>
+							<li class="breadcrumb-item active">Información detallada</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3>
+										</div>
+										<div class="card-body">
+										
+											
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Nombre
+															</label> 
+															<span class="small" th:text="${usuaria.nombre}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">CURP
+															</label> <span class="small"  th:text="${usuaria.curp}"></span>
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Edad
+															</label> <span class="small"  th:text="${usuaria.edad}"></span>
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Fecha de registro de primera vez
+															</label> <span class="small"  th:text="${usuaria.fecha}"></span>	
+														</div>
+														
+													</div>
+													
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Hora de ingreso
+															</label> <span class="small"  th:text="${usuaria.hora_ingreso}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Hora de salida
+															</label>
+														
+															<span class="small"  th:text="${usuaria.hora_egreso}"></span>
+														
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Estado civil
+															</label>
+															<span class="small"  th:text="${usuaria.id_estado_civil}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Telefono
+															</label>
+															<span class="small"  th:text="${usuaria.telefono}"></span>
+																
+														</div>
+													</div>
+														
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Como se entero del cjm
+															</label>
+															<span class="small"  th:text="${usuaria.tipo_atencion}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Tipo de atencion
+															</label>
+															<span class="small"  th:text="${usuaria.motivo_visita}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Motivo de visita
+															</label>
+															<span class="small"  th:text="${usuaria.mot_visita}"></span>
+																
+														</div>
+													</div>
+												</div>
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Domicilio</li>
+												</ol>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">País
+															</label>
+															<span class="small"  th:text="${usuaria.pais}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Estado
+															</label>
+															<span class="small"  th:text="${usuaria.estado}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Municipio
+															</label> <span class="small"  th:text="${usuaria.municipio}"></span>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Codigo postal
+															</label> <span class="small"  th:text="${usuaria.codigo_postal}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Localidad
+															</label>
+															<span class="small"  th:text="${usuaria.localidad}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Colonia
+															</label> <span class="small"  th:text="${usuaria.colonia}"></span>
+																
+														</div>
+
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Calle
+															</label> <span class="small"  th:text="${usuaria.calle}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName"> Número exterior
+															</label> 
+															<span class="small"  th:text="${usuaria.numero_exterior}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Número interior
+															</label> 
+															<span class="small"  th:text="${usuaria.numero_interior}"></span>
+																
+														</div>
+														
+													</div>
+												</div>
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Formación
+														Educativa</li>
+												</ol>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="radioLeer">¿Sabe
+																leer? </label>
+															
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="radioEscribir">¿Sabe
+																escribir? </label>
+															
+														</div>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="selectEscolaridad">Escolaridad:</label>
+														
+														</div>
+													</div>
+												</div>
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Datos Económicos</li>
+												</ol>
+												<div class="form-group">
+													<label class="small mb-1">Servicio médico con el
+														que cuenta:</label>
+												</div>
+												<div class="form-group">
+													<label class="small mb-1" for="selectTipoVivienda">Actividad
+														que realiza:</label>
+												 </div>
+										</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

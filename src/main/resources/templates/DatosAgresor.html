@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla :: header"> </header>
+	<div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+						<h1 class="mt-4">Datos del agresor</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Agresor</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos del agresor</h3>
+										</div>
+										<div class="card-body">
+											<form th:action="@{/datos_agresor}" method="post" th:object="${agresor}">
+											
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Nombres
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="nombres"
+																th:field="*{nombres}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" 
+																minlength="4" placeholder="Nombres" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}">Error nombre</span>
+																
+														</div>
+													</div>
+													
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Apellido Paterno
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="apellido_paterno"
+																th:field="*{apellido_paterno}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" 
+																minlength="4" placeholder="Apellido Paterno" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('apellido_paterno')}" th:errors="*{apellido_paterno}">Error nombre</span>
+																
+														</div>
+													</div>
+														
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Apellido Materno
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="apellido_materno"
+																th:field="*{apellido_materno}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" 
+																minlength="4" placeholder="Apellido Materno" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('apellido_materno')}" th:errors="*{apellido_materno}">Error nombre</span>
+																
+														</div>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Edad
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="number" name="nombres"
+																th:field="*{edad}"  pattern="[0-9]+"
+																minlength="4" placeholder="Edad" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}">Error nombre</span>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Fecha de nacimiento
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="date" name="fecha_nacimiento"
+																th:field="*{fecha_nacimiento}"
+																minlength="4" placeholder="Edad" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('fecha_nacimiento')}" th:errors="*{fecha_nacimiento}">Error nombre</span>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Estado civil
+															</label>
+															<select class="form-control form-control-sm"
+																id="selectEstadoCivil" th:field="*{estado_civil}">
+																<option selected value="">...</option>
+																<option th:value="Soltera">Soltero</option>
+																<option th:value="Casada">Casado</option>
+																<option th:value="Viuda">Viudo</option>
+																<option th:value="Devorciada">Devorciado</option>
+																<option th:value="LibreUnion">Union libre</option>
+															</select> 
+															
+															<span th:if="${#fields.hasErrors('estado_civil')}" th:errors="*{estado_civil}">Error nombre</span>
+																
+														</div>
+													</div>
+												</div>
+												
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Nacionalidad
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="nacionalidad"
+																th:field="*{nacionalidad}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+																 placeholder="Nacionalidad" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('nacionalidad')}" th:errors="*{nacionalidad}">Error nombre</span>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Pseudonimo
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="seudonimo"
+																th:field="*{seudonimo}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+																 placeholder="Pseudonimo" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('seudonimo')}" th:errors="*{seudonimo}">Error nombre</span>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Grupo étnico
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="grupo_etnico"
+																th:field="*{grupo_etnico}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+																 placeholder="Grupo étnico" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('grupo_etnico')}" th:errors="*{grupo_etnico}">Error nombre</span>
+																
+														</div>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">¿Conoce usted al agresor?
+															</label> 
+															<select
+																class="form-control form-control-sm"
+																id="selectMotivoVisita" th:field="*{conoce_agresor}">
+																 <option selected value="">...</option>
+																 <option th:value="si">Si</option>
+												                 <option th:value="no">No</option>
+												                 <option th:value="desconocido">Se desconoce</option>
+															</select>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">¿Tiene información adicional del o la(s) probables(s) persona(s) agresora(s)?
+															</label> 
+															<select
+																class="form-control form-control-sm"
+																id="selectMotivoVisita" th:field="*{info_adicional}">
+																 <option selected value="">...</option>
+																 <option th:value="si">Si</option>
+												                 <option th:value="no">No</option>
+															</select>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Tipo de relación o vínculo con la victima
+															</label> <input class="form-control form-control-sm py-4"
+																id="inputFirstName" type="text" name="relacion_victima"
+																th:field="*{relacion_victima}"  pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+																 placeholder="Relación" autocomplete="off" />
+															<span th:if="${#fields.hasErrors('relacion_victima')}" th:errors="*{relacion_victima}">Error nombre</span>
+																
+														</div>
+													</div>
+	
+												</div>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="inputFirstName">Sexo
+															</label>
+															<select
+																class="form-control form-control-sm"
+																id="selectMotivoVisita" th:field="*{sexo}">
+																 <option selected value="">...</option>
+																 <option th:value="si">Mujer</option>
+												                 <option th:value="no">Hombre</option>
+												                 <!-- <option th:value="desconocido">Otro</option> -->
+															</select>
+																
+														</div>
+													</div>
+	
+												</div>
+												
+												<div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+
+											</form>
+										</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

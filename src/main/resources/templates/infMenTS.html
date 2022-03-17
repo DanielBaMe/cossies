@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Informe mensual</h1>
+                        <ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+							<li class="breadcrumb-item active">Informe</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3" sec:authorize="hasAnyRole('ROLE_TS', 'ROLE_JTS')">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2"  id="preHeader">Informes</h3>
+										</div>
+										<div class="card-body">
+											<h3>Expedientes</h3>
+											<p th:text="*{expedientes}"></p>
+			
+			
+											<h3>Fichas informativas</h3>
+			
+												<p th:text="*{info}"></p>
+			
+			
+											<h3>Asesorias</h3>
+			
+												<p th:text="*{asesoria}"></p>
+										</div>
+									</div>
+									<div class="card shadow-lg border-0 rounded-lg mt-3" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2"  id="preHeader">Informes</h3>
+										</div>
+										<div class="card-body">
+											<div class="form-row">
+												<div class="col-md-6">
+													<h4>
+														Usuarias de primera vez y seguimientos
+													</h4>
+													<h6>Conteo de usuarias de primera vez</h6>
+													<p th:text="*{conteo}"></p>
+													
+													<h6>Conteo de seguimientos</h6>
+													<p th:text="*{seguimiento}"></p>
+												</div>
+												<div class="col-md-6">
+													<h4>
+														Conteo por tipos de violencia
+													</h4>
+													<p>
+														<label for="">Violencia fisica</label>
+														<span th:text="*{fisica}"></span>
+													</p>
+												</div>
+											</div>
+											
+											
+										</div>
+										
+									</div>
+									<div class="card shadow-lg border-0 rounded-lg mt-3" sec:authorize="hasAnyRole('ROLE_EMP', 'ROLE_JEMP')">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2"  id="preHeader">Informes</h3>
+										</div>
+										<div class="card-body">
+											<h2>Usuarias de primera vez</h2>
+											<table class="table table-hover">
+												<thead class="bg-light">
+													<tr>
+												
+														<th class="text-center">Dia</th>
+														<th class="text-center">Ocupacion</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="registro : ${registros}">
+													
+														<td class="text-center" th:text="${registro.dia}"></td>
+														<td class="text-center" th:text="${registro.ocupacion}"></td>
+													</tr>
+												</tbody>
+											</table>
+				
+											<h2>Seguimientos</h2>
+											<table class="table table-hover">
+												<thead class="bg-light">
+													<tr>
+														<th class="text-center">Usuaria</th>
+														<th class="text-center">Dia</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr th:each="seguimiento : ${seguimientos}">
+														<td class="text-center" th:text="${seguimiento.usuaria}"></td>
+														<td class="text-center" th:text="${seguimiento.dia}"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="card shadow-lg border-0 rounded-lg mt-3" sec:authorize="hasAnyRole('ROLE_LUD', 'ROLE_JLUD')">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2"  id="preHeader">Informes</h3>
+										</div>
+										<div class="card-body">
+											<h2>Registros de primera vez</h2>
+											<p th:text="*{registrosLudico}"></p>
+				
+											<h2>Bitacoras</h2>
+											<p th:text="*{bitacorasLudico}"></p>
+										</div>
+									</div>
+									<div class="card shadow-lg border-0 rounded-lg mt-3" sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2"  id="preHeader">Informes</h3>
+										</div>
+										<div class="card-body">
+											<h2>Carpetas de primera vez</h2>
+											<p th:text="*{carpetas}"></p>
+				
+											<h2>Seguimientos</h2>
+											<p th:text="*{archivos}"></p>
+										</div>
+									</div>
+									<div class="card shadow-lg border-0 rounded-lg mt-3" sec:authorize="hasAnyRole('ROLE_JUD', 'ROLE_JJUD')">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2"  id="preHeader">Informes</h3>
+										</div>
+										<div class="card-body">
+											<h2>Asesorías en el mes</h2>
+											<p th:text="*{conteo}"></p>
+				
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				<br>
+            </div>
+            <footer th:replace="layout/plantilla :: footer">
+            </footer>
+        </div>
+    </div>
+    <th:block th:replace="layout/plantilla::script"></th:block> 
+    <!--  -->
+</body>
+</html>

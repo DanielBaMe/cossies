@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<div class="container-fluid" >
+						<h1 class="mt-4">Servicios brindados</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Servicios</li>
+						</ol>
+						
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-lg-9">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Servicios</h3> 
+										</div>
+										<div class="card-body">
+
+											<form th:action="@{/servicios_brindados}" method="post" th:object="${servicios}">
+												<label for="psicologia">Psicología</label>
+												<input type="checkbox" name="psicologia" th:field="*{psicologia}" value='1'/>
+												<br />
+													
+												<label for="juridico">Juridico</label>
+												<input type="checkbox" name="juridico" th:field="*{juridico}" value='1'/>  <br />
+													
+												<label for="medico">Medico</label>
+												<input type="checkbox" name="medico" th:field="*{medico}" value='1'/> <br />
+													
+												<label for="mp">Ministerio Publico</label>
+												<input type="checkbox" name="mp" th:field="*{mp}"value='1' /> <br />
+													
+												<label for="fecha_nacimiento">Empoderamiento</label>
+												<input type="checkbox" name="fecha_nacimiento" th:field="*{empoderamiento}" value='1'/> <br />
+													
+												<label for="dh">DH</label>
+												<input type="checkbox" name="dh" th:field="*{dh}" value='1'/>  <br />
+													
+													
+												<div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				<br>
+			</div>
+				<footer th:replace="layout/plantilla::footer">
+				</footer>
+		</div>
+	</div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>
