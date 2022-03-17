@@ -1,14 +1,14 @@
-# CJM
+# COSSIES
 
- proyecto del estado de tlaxcala ...
+Proyecto de modernización del sistema de servicio social Tlaxcala
 
 ## Authors
 
 * **Daniel Osvaldo Baez** - *Back end* - 
-* **Margarita Cruz** - *Back end* - 
-* **Patricia Acoltzi** - *Front end* - 
-* **Juth Pulido** - *Front end* -
+* **Victor Manuel** - *Back end* - 
+* **Osbaldo Sanchez** - *Front end* - 
+* **Jesus Vazquez** - *Front end* -
 
 ## V.1.25
 
-Cambios realizados el día 28/10/2020 Osvaldo
+Cambios realizados el día 17/03/2022 Osvaldo
