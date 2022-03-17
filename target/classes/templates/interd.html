@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+	
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+    </header>
+
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+	                <div class="container-fluid">
+						<h1 class="mt-4">Regristro de reunión interdisciplinaria</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Datos de reunión</li>
+						</ol>
+
+						<div class="card-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3> 
+										</div>
+										<div class="card-body">
+
+						                    <form th:action="@{reunion_inter}" method="post" th:object=${inter}>
+						                    	<input type="hidden" th:field="*{usuaria}" />
+						                        
+						                        <div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="" class="small mb-1">Fecha</label>
+															<input type="date" class="form-control form-control-sm" name="fecha" th:min="${now}" th:field="*{fecha}">
+														</div>
+													</div>
+													
+						                        	<div class="col-md-6">
+						                        		<div class="form-group">
+						                        			<label for="lugar" class="small mb-1">Lugar</label>
+															<input type="text" class="form-control form-control-sm" name="lugar" autocomplete="off"
+															th:field="*{lugar}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="4" required/>
+												            <span th:if="${#fields.hasErrors('lugar')}" th:errors="lugar">Error nombre</span>
+						                        		</div>
+						                        	</div>
+						                        	
+						                        </div>
+						                        
+												<div class="form-row">
+													<div class="col-md-6">
+						                        		<div class="form-group">
+						                        			<label for="agenerales" class="small mb-1">Acuerdos Generales</label>
+															<textarea type="number" class="form-control form-control-sm" name="agenerales" autocomplete="off"
+															th:field="*{agenerales}" pattern="[0-9]+" minlength="4" required></textarea>
+												            <span th:if="${#fields.hasErrors('agenerales')}" th:errors="*{agenerales}">Error nombre</span>
+						                        		</div>
+						                        	</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="aespecificos" class="small mb-1">Acuerdos especificos</label>
+															<textarea type="text" class="form-control form-control-sm" name="aespecificos" autocomplete="off"
+															th:field="*{aespecificos}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="4" required></textarea>
+												            <span th:if="${#fields.hasErrors('aespecificos')}" th:errors="*{aespecificos}">Error nombre</span>
+														</div>
+													</div>
+												
+													
+												</div>
+												<div class="form-row">
+													<label for="">Trabajadoras que intervinieron</label>
+													<div class="card-body">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Nombre: activate to sort column descending">Nombre</th>
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Username: activate to sort column descending">Username</th>
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Opciones: activate to sort column descending">Opciones</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row"
+																			th:each="usuaria : ${usuarias}">
+																				<td class="sorting_1" th:text="${usuaria.nombre}"></td>
+																				<td th:text="${usuaria.username}"></td>
+																				<td><a th:href="@{/cambiar_contraseña/} + ${usuaria.idUsuario}">Cambiar contraseña</a></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+						
+						                        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+											</form>
+											<br>
+											<div th:if="*{band} == true" class="alert alert-success text-center d-flex justify-content-around">
+												<h5>
+													Familiar agregado correctamente
+												</h5>
+												<a th:href="@{/red}" class="btn btn-primary">Siguiente formulario</a>
+											</div>
+											<br>
+						                    <div class="card mb-4" th:if="${registros != null}">
+												<div class="card-header">																										
+													<h6 class="m-0 font-weight-bold" id="lista">Lista de familiares</h6>
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																		id="dataTable" width="100%" cellspacing="0"
+																		role="grid" aria-describedby="dataTable_info"
+																		style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Nombre: activate to sort column descending">
+																					Nombre</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Edad: activate to sort column ascending">
+																					Edad</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Ocupación: activate to sort column ascending">
+																					Ocupación</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Parentezco activate to sort column ascending">
+																					Parentezco</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row" 
+																				th:each="registro : ${registros}">
+																				<td class="sorting_1" th:text="${registro.nombre}"></td>
+																				<td th:text="${registro.edad}"></td>
+																				<td th:text="${registro.ocupacion}"></td>
+																				<td th:text="${registro.parentezco}"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+							                </div>
+						                    
+                   						</div>
+                   					</div>
+                   				</div>
+                   			</div>
+                   		</div>
+                   	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+    
+    
+    <th:block th:replace="layout/plantilla::script"></th:block>    
+</body>
+
+</html>

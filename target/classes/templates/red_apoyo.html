@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla::header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+	                <div class="container-fluid">
+						<h1 class="mt-4">Red de apoyo</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Red de apoyo</li>
+						</ol>
+
+						<div class="card-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Red</h3>
+										</div>
+										<div class="card-body">
+						                    <form th:action="@{/crear_red_apoyo}" method="post" th:object="${apoyo}">
+												<input type="hidden" th:field="*{expediente}" />
+												
+												<div class="form-row">
+						                        	<div class="col-md-6">
+														<div class="form-group">
+															<label for="nombre" class="small mb-1">Nombre y apellidos</label>
+															<input type="text" name="nombre" th:field="*{nombre}" class="form-control form-control-sm" autocomplete="off"
+															pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required/>
+															<small th:if="${#fields.hasErrors('nombre')}" class="text-danger" th:errors="*{nombre}">Error nombre</small>
+														</div>
+						                        		
+													</div>
+													<div class="col-md-6">
+						                        		<div class="form-group">
+															<label for="parentesco" class="small mb-1">Parentezco</label>
+															<input type="text" name="parentesco" th:field="*{parentesco}" class="form-control form-control-sm" autocomplete="off"
+															pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required/>
+															<small th:if="${#fields.hasErrors('parentesco')}" class="text-danger" th:errors="*{parentesco}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-6">
+						                        		<div class="form-group">
+															<label for="telefono" class="small mb-1">Telefono</label>
+															<input type="text" name="telefono" th:field="*{telefono}" class="form-control form-control-sm" autocomplete="off"
+															pattern="[0-9]+" minlength="4" maxlength="10" required title="Usar solo números."/>
+															<small th:if="${#fields.hasErrors('telefono')}" class="text-danger" th:errors="*{telefono}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-6">
+						                        		<div class="form-group">
+															<label for="direccion" class="small mb-1">Direccion</label>
+															<input type="text" name="direccion" th:field="*{direccion}" class="form-control form-control-sm" autocomplete="off"
+															 required/>
+															<small th:if="${#fields.hasErrors('direccion')}" class="text-danger" th:errors="*{direccion}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1">Tipo de apoyo</label>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="form-row">
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	
+																	<input type="checkbox" class="custom-control-input" id="economico" name="economico" th:field="*{tipo_apoyo}" value="economico"/>
+																	<label for="economico" class="custom-control-label">Economico</label>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	
+																	<input type="checkbox" class="custom-control-input" id="estructural" name="estructural" th:field="*{tipo_apoyo}" value="estructural"/>
+																	<label for="estructural" class="custom-control-label">Estructural</label>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	
+																	<input type="checkbox" class="custom-control-input" id="consejos" name="consejos" th:field="*{tipo_apoyo}" value="consejos"/>
+																	<label for="consejos" class="custom-control-label">Consejos/Asesoria</label>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	
+																	<input type="checkbox" class="custom-control-input" id="laboral" name="laboral" th:field="*{tipo_apoyo}" value="laboral"/>
+																	<label for="laboral" class="custom-control-label">Laboral</label>
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	 
+																	<input type="checkbox" class="custom-control-input" id="emocional" name="emocional" th:field="*{tipo_apoyo}" value="emocional"/>
+																	<label for="emocional" class="custom-control-label">Emocional</label> 
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	   
+																	<input type="checkbox" class="custom-control-input" id="alimentario" name="alimentario" th:field="*{tipo_apoyo}" value="alimentario"/>
+																	<label for="alimentario" class="custom-control-label">Alimentario</label> 
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	
+																	<input type="checkbox" class="custom-control-input" id="vivienda" name="vivienda" th:field="*{tipo_apoyo}" value="vivienda"/>
+																	<label for="vivienda" class="custom-control-label">Vivienda</label> 
+																</div>
+															</div>
+															<div class="col-md-4">
+																<div class="custom-control custom-checkbox">
+																	
+																	<input type="checkbox" class="custom-control-input" id="religioso" name="religioso" th:field="*{tipo_apoyo}" value="religioso"/>
+																	<label for="religioso" class="custom-control-label">Religioso</label>
+																	
+																</div>
+															</div>
+															<small th:if="${#fields.hasErrors('tipo_apoyo')}" class="text-danger" th:errors="*{tipo_apoyo}">Error nombre</small>
+															</div>
+													</div>
+												</div>             
+						                        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+											</form>
+										</div>
+										<br>
+										<div th:if="*{band} == true" class="alert alert-success text-center d-flex justify-content-around">
+											<h5>
+												Apoyo agregado correctamente
+											</h5>
+											<a th:href="@{/narracion_hechos}" class="btn btn-primary">Siguiente formulario</a>
+										</div>
+										<br>
+										<div class="card mb-4" th:if="${registros != null}">
+											<div class="card-header">																										
+												<h6 class="m-0 font-weight-bold" id="lista">Lista de red de apoyo</h6>
+											</div>
+											<div class="card-body">
+												<div class="table-responsive">
+													<div id="dataTable_wrapper"
+														class="dataTables_wrapper dt-bootstrap4">
+														<div class="row">
+															<div class="col-sm-12">
+																<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																	<thead>
+																		<tr role="row">
+																			<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Nombre: activate to sort column descending">
+																				Nombre</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Telefono: activate to sort column ascending">
+																				Telefono</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Dirección: activate to sort column ascending">
+																				Dirección</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Parentesco activate to sort column ascending">
+																				Parentesco</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Tipod de apoyo activate to sort column ascending">
+																				Tipo de apoyo</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr role="row" 
+																			th:each="registro : ${registros}">
+																			<td class="sorting_1" th:text="${registro.nombre}"></td>
+																			<td th:text="${registro.telefono}"></td>
+																			<td th:text="${registro.direccion}"></td>
+																			<td th:text="${registro.parentesco}"></td>
+																			<td th:text="${registro.tipo_apoyo}"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+						                    
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+
+    <th:block th:replace="layout/plantilla::script"></th:block>  
+</body>
+</html>

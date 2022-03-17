@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head th:replace="layout/plantilla::head">
+        <title>404 Error - SB Admin</title>
+    </head>
+    <!--
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>404 Error - SB Admin</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    -->
+    <body>
+        <div id="layoutError">
+            <div id="layoutError_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <div class="text-center mt-4">
+                                    <h1 class="display-1">401</h1>
+                                    <p class="lead">Acceso no autorizado</p>
+                                    <p>Usted no tiene permisos para acceder a este recurso.</p>
+                                    <a th:href="@{/}">
+                                        <i class="fas fa-arrow-left mr-1"></i>
+                                        Regresar al index
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+				
+			</footer>
+        </div>
+        <th:block th:replace="layout/plantilla::script"></th:block>
+    </body>
+</html>

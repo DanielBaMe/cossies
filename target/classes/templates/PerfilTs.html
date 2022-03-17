@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla::header">
+	</header>
+	<div id="layoutSidenav">
+		<div th:replace="layout/plantilla::aside">
+			
+		</div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<div class="container-fluid">
+						<h1 class="mt-4">Perfil de la usuaria</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+							<li class="breadcrumb-item active" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">Perfil psicologico</li>
+							<li class="breadcrumb-item active" sec:authorize="hasAnyRole('ROLE_TS', 'ROLE_JPSIC')">Perfil de usuaria</li>
+							<li class="breadcrumb-item active" sec:authorize="hasAnyRole('ROLE_EMP', 'ROLE_JEMP')">Perfil de usuaria</li>
+							<li class="breadcrumb-item active" sec:authorize="hasAnyRole('ROLE_LUD', 'ROLE_JLUD')">Perfil lúdico</li>
+						</ol>
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Información de la usuaria</h3>
+										</div>
+										<div class="card-body">
+											<h3 class="font-weight-light text-center py-2">Datos generales de la usuaria</h3>
+											<div class="form-row">
+												<div class="col-md-4">
+													<label class="font-weight-bold">Nombre: </label>
+													<span th:text="${registro.nombre}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Edad:</label>
+														<span th:text="${registro.edad}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Como se enteró del CJM:</label>
+														<span th:text="${registro.tipo_atencion}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Curp:</label>
+														<span th:text="${registro.curp}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Teléfono:</label>
+														<span th:text="${registro.telefono}"></span>
+													</p>
+							
+												</div>
+												<div class="col-md-4">
+													<h3 th:if="${nuevoDom} != null">Domicilio Anterior</h3>
+													<p>
+														<label  class="font-weight-bold">Calle:</label>
+														<span th:text="${registro.calle}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número exterior:</label>
+														<span th:text="${registro.numero_exterior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número interior:</label>
+														<span th:text="${registro.numero_interior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Colonia:</label>
+														<span th:text="${registro.colonia}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Municipio:</label>
+														<span th:text="${registro.municipio}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Codigo postal:</label>
+														<span th:text="${registro.codigo_postal}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Estado:</label>
+														<span th:text="${registro.estado}"></span>
+													</p>
+												</div>
+												<div class="col-md-4" th:if="${nuevoDom} != null">
+													<h3>Domicilio Actual</h3>
+													<p>
+														<label  class="font-weight-bold">Calle:</label>
+														<span th:text="${nuevoDom.calle}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número exterior:</label>
+														<span th:text="${nuevoDom.numero_exterior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número interior:</label>
+														<span th:text="${nuevoDom.numero_interior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Colonia:</label>
+														<span th:text="${nuevoDom.colonia}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Municipio:</label>
+														<span th:text="${nuevoDom.municipio}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Codigo postal:</label>
+														<span th:text="${nuevoDom.codigo_postal}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Estado:</label>
+														<span th:text="${nuevoDom.estado}"></span>
+													</p>
+												</div>
+												 
+											</div>
+											<div class="form-row">
+												
+												<div class="col-md-4 justify-content-center">
+													<button sec:authorize="hasRole('ROLE_TS')" type="button" class="btn btn-push" data-toggle="modal" data-target="#modalEditInfo">
+														Editar informacion de la usuaria
+													</button>
+													
+												</div>
+												<div class="col-md-4 justify-content-center" th:if="nuevoDom == null">
+													<a th:href="@{/nuevo_domicilio/} + ${registro.id}"
+													class="btn btn-push" sec:authorize="hasRole('ROLE_TS')">Registrar nuevo domicilio</a>
+												</div>
+												<div th:if="riesgo != null" class="col-md-4 justify-content-center">
+													<a th:href="@{/editar_informacion/} + ${registro.id}"
+													class="btn btn-riesgo" sec:authorize="hasRole('ROLE_TS')">Alto riesgo</a>
+												</div>
+											</div>
+											
+											<br><br>
+											<div class="form-row justify-content-around">
+												<div class="col-md-6 justify-content-center">
+													<a th:href="@{/info_detallada/} + ${registro.id}">ver informacion detallada de la usuaria</a>
+													
+												</div>
+												<div class="col-md-6">
+													<a th:href="@{/info_detallada_agresor/} + ${registro.id}">	ver informacion detallada del agresor</a>
+												
+												</div>
+											</div>
+											<br><br>
+			
+											<div sec:authorize="hasAnyRole('ROLE_TS', 'ROLE_JTS')">
+												<!-- Modal editar datos TS-->
+												<div class="modal fade" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="form-row">
+															<div class="col-md-4">
+
+															</div>
+															<div class="col-md-4">
+																<div class="row justify-content-between">
+																	<div class="">
+																		<a class="btn btn-push" th:href="@{/editar_info_usuaria/} + ${registro.id}">Información básica de la usuaria</a>
+																	</div>
+																	<div class="">
+																		<a class="btn btn-push" th:href="@{/editar_agresor_datos/} + ${registro.id}">Datos del agresor</a>
+																	</div>
+																	<div class="">
+																		<a class="btn btn-push" th:href="@{/editar_domAg/} + ${registro.id}">Domicilio del agresor</a>
+																	</div>
+																	
+																	
+																	
+																</div>
+															</div>
+															<div class="col-md-4">
+																
+																
+															</div>
+															
+														</div>
+														
+														
+													</div>
+													</div>
+												</div>
+												<div th:if="${expedienteTS} == null"
+													class="alert alert-warning text-center d-flex justify-content-center" >
+													<!-- SI NO EXISTE EXPEDIENTE -->
+													<div class="row">
+														<div class="col-md-6">
+															<h4>LA USUARIA NO TIENE UN EXPEDIENTE</h4>
+														</div>
+														<div class="col-md-6 justify-content-center">
+															<td>
+																<a class="btn btn-push"
+																	th:href="@{/registro_expediente/} + ${registro.id}">Crear expediente</a>
+															</td>
+														</div>
+													</div>
+													
+												</div>
+			
+												<div th:if="${expedienteTS} != null">
+													<div class="">
+														<h3 class="font-weight-bold text-center">Fecha de creación de expediente <span th:text="${fechaexp}"></span></h3>
+														
+														<!-- <label class="font-weight-bold">Servicio medico con el que cuenta</label>
+														<span th:text="${expedienteTS.servicio_medico}"></span> -->
+													</div>
+													<hr>
+													<!-- SI EXISTE EXPEDIENTE -->
+													<h2>ÁREA PSICOLOGICA</h2>
+			
+													<div th:if="${pexpediente} == null" class="alert alert-warning text-warning d-flex justify-content-around">
+														<!-- SI NO EXISTE EXPEDIENTE PSICOLOGICO-->
+														<h3>LA USUARIA NO CUENTA CON EXPEDIENTE PSICOLOGICO</h3>
+													</div>
+													<div th:if="${pexpediente} != null">
+														<!-- SI EXISTE EXPEDIENTE PSICOLOGICO-->
+														<h3 class="font-weight-light text-center py-2">Ya se ha aperturado un expediente en esta area</h3>
+														<label class="font-weight-bold">
+															Fecha de primer contacto
+														</label>
+														<span th:text="${pexpediente}"></span>
+														<div th:if="${pseguimientos} == null" class="alert alert-warning text-warning d-flex justify-content-around">
+															<!-- SI NO EXISTEN SEGUIMIENTOS PSICOLOGICOS-->
+															<h3>LA USUARIA NO TIENE SEGUIMIENTOS</h3>
+														</div>
+														<div th:if="${pseguimientos} != null">
+															<!-- SI EXISTEN SEGUIMIENTOS PSICOLOGICOS-->
+															<label class="font-weight-bold">Número de seguimientos: </label>
+															<span th:text="${pseguimientos}"></span>
+															
+														</div>
+														<div th:if="${agendaPsic} !=null">
+															<label class="font-weight-bold">Siguiente cita: <span th:text="${agendaPsic.fecha}"></span> a las <span th:text="${agendaPsic.hora}"></span></label>
+														</div>
+													</div>
+													<hr>
+													<h2>ÁREA JURIDICA</h2>
+													<hr>
+													<h2>ÁREA EMPODERAMIENTO</h2>
+													<hr>
+			
+													<h2>ÁREA MP</h2>
+												</div>
+			
+											</div>
+											<hr>
+											<div sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">
+												<div th:if="${expedienteTS} == null" class="alert alert-warning text-warning d-flex justify-content-around">
+													<p class="text-dark">
+														LA USUARIA NO HA ABIERTO UN
+													EXPEDIENTE EN TRABAJO SOCIAL. HACER LA CANALIZACIÓN AL ÁREA
+													CORRESPONDIENTE.
+													</p> 
+												</div>
+												<div th:if="${expedienteTS} != null">
+													<h3 class="font-weight-bold text-center">Fecha de creación de expediente <span th:text="${fechaexp}"></span></h3>
+													<div th:if="${expediente} != null">
+														<h2>Datos de la valoracion</h2>
+														<br>
+														<div class="form-row">
+															<div class="col-md-4">
+																<label class="font-weight-bold">Motivo de la consulta</label>
+																<p th:text="${expediente.motivo_consulta}"></p>
+																<label class="font-weight-bold">Diagnostrico</label>
+																<p th:text="${expediente.dx}"></p>
+																<label class="font-weight-bold">Objetivo</label>
+																<p th:text="${expediente.objetivo}"></p>
+																<label class="font-weight-bold">Tarea</label>
+																<p th:text="${expediente.tarea}"></p>
+																<label class="font-weight-bold">Observaciones</label>
+																<p th:text="${expediente.observ}"></p>
+															</div>
+															<div class="col-md-4">
+																<label class="font-weight-bold">Tipo de violencia</label>
+																<p th:text="${expediente.fisica}"></p>
+																<p th:text="${expediente.psic}"></p>
+																<p th:text="${expediente.sex}"></p>
+																<p th:text="${expediente.econo}"></p>
+																<p th:text="${expediente.patri}"></p>
+																<p th:text="${expediente.cyber}"></p>
+																<label class="font-weight-bold">Canalizada</label>
+																<p th:text="${expediente.canalizada}"></p>
+																<label class="font-weight-bold">Psicóloga</label>
+																<p th:text="${expediente.psicologa}"></p>
+															</div>
+															<div class="col-md-4">
+																<label class="font-weight-bold">Ambito familiar</label>
+																<p th:text="${expediente.familiar}"></p>
+																<label class="font-weight-bold">Ambito social</label>
+																<p th:text="${expediente.social}"></p>
+																<label class="font-weight-bold">Ambito laboral</label>
+																<p th:text="${expediente.laboral}"></p>
+																<label class="font-weight-bold">Ambito sexual</label>
+																<p th:text="${expediente.sexual}"></p>
+																<label class="font-weight-bold">Ambito individual</label>
+																<p th:text="${expediente.individual}"></p>
+																
+															</div>
+														</div>
+														<br>
+														<hr>
+														<div class="alert alert-info d-flex justify-content-around" th:if="${agendaPsic} != null">
+															<h3>Siguiente cita: <span th:text="${agendaPsic.fecha}"></span> a las <span th:text="${agendaPsic.hora}"></span></h3>
+															<div th:if="${seguimientos} == null">
+																<a class="btn btn-primary" th:href="@{/seguimiento_psic/} + ${registro.id}">Hacer seguimiento</a>
+															</div>
+															<!-- Button trigger modal -->
+															<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+																Editar cita
+															</button>
+														</div>
+														<div th:if="${agendaPsic} == null" class="justify-content-center">
+															<a class="btn btn-primary" th:href="@{/seguimiento_psic/} + ${registro.id}">Hacer seguimiento</a>
+														</div>
+													</div>
+													
+													<!-- Modal cita psicologia-->
+													<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																<h5 class="modal-title" id="exampleModalLabel">Nueva fecha de cita</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+																</div>
+																<div class="modal-body">
+																	<form th:action="@{/editar_cita}" method="post" th:object="${agendaPsic}">
+																		<label for="">Fecha</label>
+																		<input type="date" name="fecha" th:min="${now}" th:field="*{fecha}">
+																		<label for="">Hora</label>
+																		<input  type="time" name="hora" th:field="*{hora}">
+																		<input type="hidden" th:field="*{id}">
+																		<input type="hidden" th:field="*{usuaria}">
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+																			<button type="submit" class="btn btn-primary">Guardar cambios</button>
+																		</div>
+																	</form>
+																	
+																</div>
+																
+															</div>
+														</div>
+													</div>
+													
+													<div th:if="${expediente} == null" class="alert alert-warning d-flex justify-content-around">
+														<p class="text-dark">
+															No hay un expediente de la usuaria
+														</p>
+														<a class="btn btn-primary" th:href="@{/expediente_psicologico/} + ${registro.id}">Crear valoración</a>
+													</div>
+			
+													<div th:if="${expediente} != null">
+														<div class="card mb-4" th:if="${seguimientos} != null">
+															<div class="card-header">																										
+																<h6 class="m-0 font-weight-bold" id="lista">Datos de los seguimientos</h6>
+															</div>
+															<div class="card-body">
+																<div class="table-responsive">
+																	<div id="dataTable_wrapper"
+																		class="dataTables_wrapper dt-bootstrap4">
+																		<div class="row">
+																			<div class="col-sm-12">
+																				<table class="table table-bordered dataTable"
+																				id="dataTable" width="100%" cellspacing="0"
+																				role="grid" aria-describedby="dataTable_info"
+																				style="width: 100%;">
+																					<thead>
+																						<tr role="row">
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Sesión: activate to sort column descending">No. Sesión</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Fecha: activate to sort column descending">Fecha</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Objetivo: activate to sort column descending">Objetivo</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Tarea: activate to sort column descending">Tarea</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Observaciones: activate to sort column descending">Observaciones</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Sesión: activate to sort column descending">Tipo de sesión</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Entrada: activate to sort column descending">Hora de entrada</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Salida: activate to sort column descending">Hora de salida</th>
+																						</tr>
+																					</thead>
+																					<tbody>
+																						<tr role="row"
+																						 th:each="seguimiento : ${seguimientos}">
+																							 <td class="sorting_1" th:text="${seguimiento.no_sesion}"></td>
+																							 <td th:text="${seguimiento.dia + '/' +  seguimiento.mes + '/' + seguimiento.anio}"></td>
+																							<td th:text="${seguimiento.objetivo}"></td>
+																							<td th:text="${seguimiento.tarea}"></td>
+																							<td th:text="${seguimiento.observaciones}"></td>
+																							<td th:text="${seguimiento.sesion}"></td>
+																							<td th:text="${seguimiento.h_entrada}"></td>
+																							<td th:text="${seguimiento.h_salida}"></td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<br />
+															<br />
+															<div class="py-2 d-flex justify-content-center">
+																<a class="btn btn-primary  btn-block" th:href="@{/seguimiento_psic/} + ${registro.id}">Hacer seguimiento</a>
+															</div>
+															
+														</div>
+														<hr>
+														<h3 class="font-weight-light text-center py-2">Crear registro infantil</h3>
+														<div class="d-flex justify-content-center">
+															<a class="btn btn-primary  btn-block" th:href="@{/registro_infantil_psic/} + ${registro.id}">Registro
+																infantil</a>
+														</div>
+														<br>
+														<div class="d-flex justify-content-center">
+															<a class="btn btn-primary  btn-block" th:href="@{/peritaje/} + ${registro.id}">Peritaje</a>
+														</div>
+														<br>
+														<br>
+													</div>
+													
+													
+												</div>
+											</div>
+										
+											<div sec:authorize="hasAnyRole('ROLE_LUD', 'ROLE_JLUD')">
+												<div class="card mb-4" th:if="${registros} != null">
+													<div class="card-header">																										
+														<h6 class="m-0 font-weight-bold" id="lista">Datos de los hijos de la usuaria</h6>
+													</div>
+													<div class="card-body">
+														<div class="table-responsive">
+															<div id="dataTable_wrapper"
+																class="dataTables_wrapper dt-bootstrap4">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<table class="table table-bordered dataTable"
+																		id="dataTable" width="100%" cellspacing="0"
+																		role="grid" aria-describedby="dataTable_info"
+																		style="width: 100%;">
+																			<thead>
+																				<tr role="row">
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Nombre: activate to sort column descending">
+																					Nombre</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Domicilio: activate to sort column descending">
+																					Domicilio</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Ocupacion: activate to sort column descending">
+																					Ocupacion</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Edad: activate to sort column descending">
+																					Edad</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr role="row" 
+																				th:each="registro : ${registros}">
+																					<td class="sorting_1" th:text="${registro.nombre}"></td>
+																					<td th:text="${registro.domicilio}"></td>
+																					<td th:text="${registro.ocupacion}"></td>
+																					<td th:text="${registro.edad}"></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<br />
+													<br />
+													<td><a class="btn btn-info  btn-block" th:href="@{/expediente_ludico/} + ${registro.id}">
+															Hacer registro</a></td>
+												</div>
+												<div th:if="${registros} == null" class="alert alert-warning text-warning d-flex justify-content-around">
+													
+													<p class="text-dark">Esta usuaria no tiene hijos registrados en esta area</p>
+												
+												
+													<td><a class="btn btn-primary" th:href="@{/expediente_ludico/} + ${registro.id}">
+														Hacer registro</a></td>
+												</div>
+													
+													
+												
+											</div>
+										
+											<div sec:authorize="hasAnyRole('ROLE_EMP', 'ROLE_JEMP')">
+												<h3 class="font-weight-light text-center py-2">Formación educativa</h3>
+											<p>
+												<label class="font-weight-bold">Actividad que realiza:</label>
+												<span th:text="${expediente.actividad}"></span>
+											</p>
+											<p>
+												<label class="font-weight-bold">Escolaridad:</label>
+												<span th:text="${expediente.escolaridad}"></span>
+											</p>
+											<p>
+												<label class="font-weight-bold">Sabe escribir:</label>
+												<span th:text="${expediente.escribir}"></span>
+											</p>
+											<p>
+												<label class="font-weight-bold">Sabe leer:</label>
+												<span th:text="${expediente.leer}"></span>
+											</p>
+											<p>
+												<label class="font-weight-bold">Servicio medico con el que cuenta:</label>
+												<span th:text="${expediente.servicio_medico}"></span>
+											</p>
+											<br>
+											<div th:if="${expedientePsic} != null">
+												<h3 class="font-weight-bold text-center">Fecha de creación de expediente <span th:text="${fechaexp}"></span></h3>
+												<h2>Expediente de empoderamiento</h2>
+												<div th:if="${registroEmp} == null" class="alert alert-warning text-warning d-flex justify-content-around">
+													<p class="text-dark">No hay un registro de la usuaria</p>
+													<td>
+														<a class="btn btn-primary" th:href="@{/registro_emp/} + ${registro.id}">
+															Hacer registro
+														</a>
+													</td>
+												</div>
+											</div>
+											<div th:if="${expedientePsic} == null">
+												<div class="alert alert-warning text-warning d-flex justify-content-center">
+													<p class="text-dark">LA USUARIA NO HA PASADO POR EL ÁREA DE PSICOLOGÍA</p>
+													
+												</div>
+											</div>
+									
+												
+												<div th:if="${registroEmp} != null">
+													<p></p>
+													<div class="form-row">
+														<div class="col-md-4">
+															<p>
+																<label class="font-weight-bold">Fecha de registro al área:</label>
+																<span th:text="${registroEmp.dia}"></span><span>/</span><span th:text="${registroEmp.mes}"></span><span>/</span><span th:text="${registroEmp.anio}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Folio:</label>
+																<span th:text="${registroEmp.folio}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Hora de entrada:</label>
+																<span th:text="${registroEmp.hora_entrada}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Hora de salida:</label>
+																<span th:text="${registroEmp.hora_salida}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Escolaridad:</label>
+																<span th:text="${registroEmp.escolaridad}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Certificado:</label>
+																<span th:text="${registroEmp.certificado}"></span>
+															</p>
+														</div>
+														<div class="col-md-4">
+															
+															<p>
+																<label class="font-weight-bold">Experiencia laboral:</label>
+																<span th:text="${registroEmp.exp_laboral}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Ultimo empleo:</label>
+																<span th:text="${registroEmp.ultimo_empleo}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Ocupacion:</label>
+																<span th:text="${registroEmp.ocupacion}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Habilidades:</label>
+																<span th:text="${registroEmp.habilidades}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Desarrolla algun negocio:</label>
+																<span th:text="${registroEmp.desarrolla_negocio}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Estudios actuales:</label>
+																<span th:text="${registroEmp.est_actuales_escuela}"></span>
+															</p>
+														</div>
+														<div class="col-md-4">
+															<p>
+																<label class="font-weight-bold">Horario de estudios actuales:</label>
+																<span th:text="${registroEmp.est_actuales_horario}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Curso:</label>
+																<span th:text="${registroEmp.est_actuales_curso}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Grado:</label>
+																<span th:text="${registroEmp.est_actuales_grado}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Apoyo escolar:</label>
+																<span th:text="${registroEmp.apoyo_escolar}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Apoyo de trabajo:</label>
+																<span th:text="${registroEmp.apoyo_trabajo}"></span>
+															</p>
+															<p>
+																<label class="font-weight-bold">Canalización:</label>
+																<span th:text="${registroEmp.canalizacion}"></span>
+															</p>
+														</div>
+													</div>
+													
+													
+													
+													<div th:if="${seguimientos} == null" class="alert alert-warning text-warning d-flex justify-content-around">
+														<p class="text-dark">No hay seguimientos de esta usuaria</p>
+														<div th:if="${expediente} != null">
+															<a class="btn btn-primary" th:href="@{/seguimiento_emp/} + ${registro.id}">Hacer
+																	seguimiento</a>
+														</div>
+													</div>
+												</div>
+			
+												<br>
+												<div class="card mb-4" th:if="${seguimientos} != null">
+													<div class="card-header">																										
+														<h6 class="m-0 font-weight-bold" id="lista">Datos de los seguimientos</h6>
+													</div>
+													<div class="card-body">
+														<div class="table-responsive">
+															<div id="dataTable_wrapper"
+																class="dataTables_wrapper dt-bootstrap4">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<table class="table table-bordered dataTable"
+																		id="dataTable" width="100%" cellspacing="0"
+																		role="grid" aria-describedby="dataTable_info"
+																		style="width: 100%;">
+																			<thead>
+																				<tr role="row">
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Seguimiento: activate to sort column descending">Numero de seguimiento</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Fecha: activate to sort column descending">Fecha</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Observaciones: activate to sort column descending">Observaciones</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr role="row" th:each="seguimiento : ${seguimientos}">
+																					<td th:text="${seguimiento.seguimiento}"></td>
+																					<td th:text="${seguimiento.dia + '/' +  seguimiento.mes + '/' + seguimiento.anio}"></td>
+																					<td th:text="${seguimiento.observaciones}"></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+													</div>
+													<br />
+													<br />
+													<div class="py-2 d-flex justify-content-center">
+														<a class="btn btn-primary  btn-block" th:href="@{/seguimiento_emp/} + ${registro.id}">Hacer seguimiento</a>
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				<br>
+			</div>
+			<footer th:replace="layout/plantilla::footer">
+					
+			</footer>
+		</div>
+	</div>
+	
+
+	<th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>

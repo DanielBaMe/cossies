@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+<header th:replace="layout/plantilla :: header">
+</header>
+    <div id="layoutSidenav">
+      <div th:replace="layout/plantilla::aside">
+              
+      </div>
+      <div id="layoutSidenav_content">
+          <div id="layoutAuthentication_content">
+            <main>
+            	<div class="container-fluid">
+					<h1 class="mt-4">Seguimiento psicólogico</h1>
+					<ol class="breadcrumb mb-4">
+						<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+						<li class="breadcrumb-item active">Seguimiento</li>
+					</ol>
+					
+					<div class="col-mb-4">
+					<div class="justify-content-center">
+						<div class="col-mb-4">
+							<div class="card shadow-lg border-0 rounded-lg mt-3">
+								<div class="card-header">
+									<h3 class="text-center font-weight-light my-2" id="preHeader">Datos del
+										seguimiento</h3>
+								</div>
+								<div class="card-body">
+				                    <form th:action="@{/nuevo_seguimiento}" method="post" th:object="${seguimiento}">
+				
+				                        <div class="row">
+										
+											<div class="col-md-6">
+												<label for="nombre">Tipo de sesión</label>
+												<select th:field="*{sesion}" class="form-control">
+													<option th:value="grupal">Grupal</option>
+													<option th:value="individual">Individual</option>
+												</select>
+											</div>
+					                       <input type="hidden" th:field="*{h_entrada}">
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="objetivo">Objetivo</label>
+													<input class="form-control" type="text" autocomplete="off"
+													name="objetivo" th:field="*{objetivo}" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="Solo letras." />
+													<small th:if="${#fields.hasErrors('objetivo')}" th:errors="*{objetivo}" class="text-danger">Error nombre</small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="tarea">Tarea</label>
+													<input class="form-control" type="text" autocomplete="off"
+													name="tarea" th:field="*{tarea}" title="Solo letras." pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" />
+													<small th:if="${#fields.hasErrors('tarea')}" th:errors="*{tarea}" class="text-danger">Error nombre</small>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="psicologa">Psicóloga</label>
+													<input class="form-control" type="text" autocomplete="off"
+													name="psicologa" th:field="*{psicologa}" title="Solo letras." pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required/>
+													<small th:if="${#fields.hasErrors('psicologa')}" th:errors="*{psicologa}" class="text-danger">Error nombre</small>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="psicologa">Observaciones</label>
+													<input id="datetimepicker1" class="form-control" autocomplete="off"
+													type="text" name="observaciones" th:field="*{observaciones}" title="Solo letras." pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" required/>
+													<small th:if="${#fields.hasErrors('observaciones')}" th:errors="*{observaciones}" class="text-danger">Error nombre</small>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<label for="fecha">Agendar cita</label>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<input class="form-control" type="date" th:min="${now}" name="fecha" th:field="*{fecha}" />
+														</div>
+													</div>
+													<div class="col-md-4">
+														<input class="form-control" type="time" name="hora" th:field="*{hora}" />
+													</div>
+												</div>
+											</div>
+										</div>
+				                       
+										       
+				                        <input type="hidden" th:field="*{usuaria}" />
+				                        <div class="form-group mt-4 mb-0">
+											<button type="submit" class="btn btn-save btn-block">
+												<i class="fas fa-save"></i> Agregar
+											</button>
+											
+										</div>
+				                    </form>
+				                </div>
+				            </div>
+				        </div>
+				   </div>		               
+              		</div>
+          		</div> 
+          	</main>
+         	<br>
+      	</div>
+      <footer th:replace="layout/plantilla :: footer">
+      </footer>
+      </div>
+    </div>
+     <th:block th:replace="layout/plantilla::script"></th:block> 
+    </body>
+</html>

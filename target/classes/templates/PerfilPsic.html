@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla::header">
+	</header>
+	<div id="layoutSidenav">
+		<div th:replace="layout/plantilla::aside">
+			
+		</div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<div class="container-fluid">
+						<h1 class="mt-4" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">Perfil del niño</h1>
+						<h1 class="mt-4" sec:authorize="hasAnyRole('ROLE_JUD', 'ROLE_JJUD' , 'ROLE_JMP', 'ROLE_MP')">Información</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+							<li class="breadcrumb-item active" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">Perfil psicologico infantil</li>
+							<li class="breadcrumb-item active" sec:authorize="hasAnyRole('ROLE_JUD', 'ROLE_JJUD')">Perfil juridico</li>
+							<li class="breadcrumb-item active" sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')">Perfil MP</li>
+
+						</ol>
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header">
+											<h3 class="text-center font-weight-light my-2" id="preHeader" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')" >Información del niño</h3>
+											<h3 class="text-center font-weight-light my-2" id="preHeader" sec:authorize="hasAnyRole('ROLE_JUD', 'ROLE_JJUD', 'ROLE_JMP', 'ROLE_MP')" >Información de la usuaria</h3>
+										</div>
+										<!-- Modal agenda cita PSIC-->
+										<div sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Nueva fecha de cita</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												</div>
+												<div class="modal-body">
+													<form th:action="@{/editar_cita_inf}" method="post" th:object="${agenda}">
+														<label for="">Fecha</label>
+														<input type="date" name="fecha" th:min="${now}" th:field="*{fecha}">
+														<label for="">Hora</label>
+														<input  type="time" name="hora" th:field="*{hora}">
+														<input type="hidden" th:field="*{id}">
+														<input type="hidden" th:field="*{nino}">
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+															<button type="submit" class="btn btn-primary">Guardar cambios</button>
+														</div>
+													</form>
+													
+												</div>
+												
+											</div>
+											</div>
+										</div>	
+
+										<!-- Modal carpeta de investigacion MP-->
+										<div sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')" class="modal fade" id="modalMP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Nueva carpeta de investigación</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+												</div>
+												<div class="modal-body">
+													<form th:action="@{/guardar_carpeta}" method="post" th:object="${nueva}">
+														<label for="">Fecha</label>
+														<input type="date" name="fecha" th:field="*{fecha}">
+													
+														
+														<input type="hidden" th:field="*{usuaria}">
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+															<button type="submit" class="btn btn-primary">Guardar cambios</button>
+														</div>
+													</form>
+													
+												</div>
+												
+											</div>
+											</div>
+										</div>
+										<div class="card-body">
+											<h3 class="font-weight-light text-center py-2">Datos generales de la usuaria</h3>
+											<div class="form-row">
+												<div class="col-md-4">
+													<label class="font-weight-bold">Nombre: </label>
+													<span th:text="${registro.nombre}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Edad:</label>
+														<span th:text="${registro.edad}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Como se enteró del CJM:</label>
+														<span th:text="${registro.tipo_atencion}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Curp:</label>
+														<span th:text="${registro.curp}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Teléfono:</label>
+														<span th:text="${registro.telefono}"></span>
+													</p>
+							
+												</div>
+												<div class="col-md-4">
+													<h3 th:if="${nuevoDom} != null">Domicilio Anterior</h3>
+													<p>
+														<label  class="font-weight-bold">Calle:</label>
+														<span th:text="${registro.calle}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número exterior:</label>
+														<span th:text="${registro.numero_exterior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número interior:</label>
+														<span th:text="${registro.numero_interior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Colonia:</label>
+														<span th:text="${registro.colonia}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Municipio:</label>
+														<span th:text="${registro.municipio}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Codigo postal:</label>
+														<span th:text="${registro.codigo_postal}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Estado:</label>
+														<span th:text="${registro.estado}"></span>
+													</p>
+												</div>
+												<div class="col-md-4" th:if="${nuevoDom} != null">
+													<h3>Domicilio Actual</h3>
+													<p>
+														<label  class="font-weight-bold">Calle:</label>
+														<span th:text="${nuevoDom.calle}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número exterior:</label>
+														<span th:text="${nuevoDom.numero_exterior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Número interior:</label>
+														<span th:text="${nuevoDom.numero_interior}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Colonia:</label>
+														<span th:text="${nuevoDom.colonia}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Municipio:</label>
+														<span th:text="${nuevoDom.municipio}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Codigo postal:</label>
+														<span th:text="${nuevoDom.codigo_postal}"></span>
+													</p>
+													<p>
+														<label  class="font-weight-bold">Estado:</label>
+														<span th:text="${nuevoDom.estado}"></span>
+													</p>
+												</div>
+												
+											</div>
+										
+											
+											
+											<br><br>
+											<div class="form-row justify-content-around">
+												<div class="col-md-6 justify-content-center">
+													<a th:href="@{/info_detallada/} + ${registro.id}">ver informacion detallada de la usuaria</a>
+													
+												</div>
+												<div class="col-md-6">
+													<a th:href="@{/info_detallada_agresor/} + ${registro.id}">	ver informacion detallada del agresor</a>
+												
+												</div>
+											</div>
+											<br><br>
+											<div th:if="${ultima} == null" sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')">
+												<div class="alert alert-info d-flex justify-content-around">
+													<h3>La usuaria no tiene una carpeta de investigación</h3>
+													
+													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMP">
+														Crear carpeta de investigación
+													</button>
+												
+													
+												</div>
+											</div>
+											
+											<div th:if="${infante} != null" class="form-row" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">
+												<div class="col-md-4">
+													<p>
+														<label for="" class="font-weight-bold">Nombre</label>
+														<span th:text="${infante.nombre}"></span>
+													</p>
+													<p>
+														<label for="" class="font-weight-bold">Edad</label>
+														<span th:text="${infante.edad}"></span>
+													</p>
+													
+													<p>
+														<label for="" class="font-weight-bold">Religión</label>
+														<span th:text="${infante.religion}"></span>
+													</p>
+													
+													<p>
+														<label for="" class="font-weight-bold">Estudios</label>
+														<span th:text="${infante.estudios}"></span>
+													</p>
+													
+												</div>
+												<div class="col-md-4">
+													<p>
+														<label for="" class="font-weight-bold">Ocupación</label>
+														<span th:text="${infante.ocupacion}"></span>
+													</p>
+													<p>
+														<label for="" class="font-weight-bold">Motivo</label>
+														<span th:text="${infante.motivo}"></span>
+													</p>
+													<p>
+														<label for="" class="font-weight-bold">Tipo de violencia</label>
+														<span th:text="${infante.tipo_violencia}"></span>
+													</p>
+													<p>
+														<label for="" class="font-weight-bold">Observación</label>
+														<span th:text="${infante.observacion}"></span>
+													</p>
+												</div>
+												<div class="col-md-4">
+													<p>
+														<label for="" class="font-weight-bold">Tarea</label>
+														<span th:text="${infante.tarea}"></span>
+													</p>
+													<p>
+														<label for="" class="font-weight-bold">Diagnostico</label>
+														<span th:text="${infante.dx}"></span>
+													</p>
+													<p>
+														<label for="" class="font-weight-bold">Objetivo</label>
+														<span th:text="${infante.objetivo}"></span>
+													</p>
+													<p>
+														<label for="" class="font-weight-bold">Psicologa</label>
+														<span th:text="${infante.psicologa}"></span>
+													</p>
+												</div>
+												
+											</div>
+											<div th:if="${perfillus} != null" class="form-row">
+													<div class="col-md-4">
+														<p>
+															<label class="font-weight-bold">Folio</label>
+															<span th:text="${perfillus.folio}"></span>
+														</p>
+														<p>
+															<label class="font-weight-bold">Fecha de registro</label>
+															<span th:text="${perfillus.dia + '/' +  perfillus.mes + '/' + perfillus.anio}"></span>
+														</p>
+													</div>
+													<div class="col-md-4">
+														<p>
+															<label class="font-weight-bold">Nombre</label>
+															<span th:text="${perfillus.nombre}"></span>
+														</p>
+														<p>
+															<label class="font-weight-bold">Domicilio</label>
+															<span th:text="${perfillus.domicilio}"></span>
+														</p>
+													</div>
+													<div class="col-md-4">
+														<p>
+															<label class="font-weight-bold">Ocupacion</label>
+															<span th:text="${perfillus.ocupacion}"></span>
+														</p>
+														<p>
+															<label class="font-weight-bold">Edad</label>
+															<span th:text="${perfillus.edad}"></span>
+														</p>
+													</div>
+											</div>
+											<div th:if="${seguimientos} == null" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">
+												<div class="alert alert-info d-flex justify-content-around" th:if="${agenda} != null">
+													<h3>Siguiente cita: <span th:text="${agenda.fecha}"></span> a las <span th:text="${agenda.hora}"></span></h3>
+													<div th:if="${seguimientos} == null">
+														<a class="btn btn-primary" th:href="@{/seguimiento_psic_inf/} + ${infante.id}">Hacer seguimiento</a>
+													</div>
+													<!-- Button trigger modal -->
+													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+														Editar cita
+													</button>
+												</div>
+											</div>
+											<div sec:authorize="hasAnyRole('ROLE_JUD', 'ROLE_JJUD')">
+												<hr>
+												<div class="card mb-4" th:if="${seguimientosJud} != null">
+													<div class="card-header">																										
+														<h6 class="m-0 font-weight-bold" id="lista">Datos de las asesorías</h6>
+													</div>
+													<div class="card-body">
+														<div class="table-responsive">
+															<div id="dataTable_wrapper"
+																class="dataTables_wrapper dt-bootstrap4">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<table class="table table-bordered dataTable"
+																		id="dataTable" width="100%" cellspacing="0"
+																		role="grid" aria-describedby="dataTable_info"
+																		style="width: 100%;">
+																			<thead>
+																				<tr role="row">
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Sesión: activate to sort column descending">No. Sesión</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Fecha: activate to sort column descending">Fecha</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Objetivo: activate to sort column descending">Hora de entrada</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Tarea: activate to sort column descending">Hora de finalización</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Observaciones: activate to sort column descending">Asesoria</th>
+																					<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Sesión: activate to sort column descending">Municipio</th>
+																					
+																				</tr>
+																			</thead>
+																			<tbody>
+																				<tr role="row"
+																				 th:each="seguimiento : ${seguimientosJud}">
+																					<td class="sorting_1" th:text="${seguimiento.sesion}"></td>
+																					<td th:text="${seguimiento.fecha}"></td>
+																					<td th:text="${seguimiento.hora_e}"></td>
+																					<td th:text="${seguimiento.hora_s}"></td>
+																					<td th:text="${seguimiento.seguimiento}"></td>
+																					<td th:text="${seguimiento.municipio}"></td>
+																		
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<br />
+													<br />
+													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditInfo" >Hacer seguimiento</button>
+													<br><br>
+													<div class="py-2 d-flex justify-content-center">
+														<a class="btn btn-primary  btn-block" th:href="@{/inter/} + ${usuaria}">Registrar reunión interdisciplinaria</a>
+													</div>
+													<!--<div class="py-2 d-flex justify-content-center">
+														<a class="btn btn-primary  btn-block" th:href="@{/seguimiento_psic/} + ${usuaria}">Hacer seguimiento</a>
+													</div>
+													-->
+												</div>
+												<div class="d-flex justify-content-around">
+												<div th:if="${seguimientosJud} == null">
+													<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditInfo" >Hacer asesoría</button>
+												</div>
+											
+												
+													<!-- Modal editar datos TS-->
+												<div class="modal fade bd-example-modal-lg" id="modalEditInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal-dialog model-lg" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">Nuevo seguimiento</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+															</div>
+															<div class="modal-body">
+																<form th:action="@{/seguimiento_juridico}" method="post" th:object="${seguimientoJ}">
+																	<div>
+																		<div class="row justify-content-around">
+																			<div class="col-md-4">
+																				<label for="" class="small">Fecha</label>
+																				<input type="date" name="fecha" th:min="${now}" th:field="*{fecha}">
+																			</div>
+																			<div class="col-md-4">
+																				<label for="" class="small">Municipio</label>
+																					<input  type="text" name="hora" th:field="*{municipio}" autocomplete="off">
+																			</div>
+																			
+																		</div>
+																	</div>
+																	<div>
+																		<div class="row justify-content-around">
+																	
+																			<div class="col-md-4">
+																				<label for="" class="small">Hora comienzo</label>
+																				<input  type="time" name="hora" th:field="*{hora_e}">
+																			</div>
+																			<div class="col-md-4">
+																				<label for="" class="small">Hora finalizado</label>
+																				<input  type="time" name="hora" th:field="*{hora_s}">
+																			</div>
+																		</div>
+																	</div>
+																
+																	
+																
+																	
+																	
+																	<br>
+																	<div class="justify-content-center">
+																		<div >
+																			<label for="asesoria" class="small">Asesoria</label>
+																			<textarea name="asesoria" rows="4" cols="50" th:field="*{seguimiento}">
+																			</textarea>
+																		</div>
+																	
+																	</div>
+																	
+																	<input type="hidden" th:field="*{usuaria}">
+																	<div class="modal-footer justify-content-around">
+																		
+																			<div class="col-md-4">
+																				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+																			</div>
+																			<div class="col-md-4">
+																				<button type="submit" class="btn btn-primary">Guardar cambios</button>
+																			</div>
+																			
+																			
+																	
+																		
+																	</div>
+																</form>
+																
+															</div>
+															
+														</div>
+													</div>
+												</div>
+													<!--<form th:action="@{/inter/} + ${seguimientosJud.usuaria}"" method="post"  th:object="${seguimientoJ}">
+														<input th:field="*{usuaria}" type="hidden">
+														<button type="submit" class="btn btn-primary">Registrar reunión interdisciplinaria</button>
+													</form>-->
+												</div>
+												
+											</div>
+											<br>
+											<hr>
+											<div class="card mb-4" th:if="${seguimientos} != null" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">
+												<div class="card-header">																										
+													<h6 class="m-0 font-weight-bold" id="lista">Datos de los seguimientos</h6>
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Sesión: activate to sort column descending">No. Sesión</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Fecha: activate to sort column descending">Fecha</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Objetivo: activate to sort column descending">Objetivo</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Tarea: activate to sort column descending">Tarea</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Observaciones: activate to sort column descending">Observaciones</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Sesión: activate to sort column descending">Tipo de sesión</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Entrada: activate to sort column descending">Hora de entrada</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Salida: activate to sort column descending">Hora de salida</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row" th:each="seguimiento : ${seguimientos}">
+																				<td class="sorting_1" th:text="${seguimiento.no_sesion}"></td>
+																					<td th:text="${seguimiento.dia + '/' +  seguimiento.mes + '/' + seguimiento.anio}"></td>
+																					<td th:text="${seguimiento.objetivo}"></td>
+																					<td th:text="${seguimiento.tarea}"></td>
+																					<td th:text="${seguimiento.observaciones}"></td>
+																					<td th:text="${seguimiento.sesion}"></td>
+																					<td th:text="${seguimiento.h_entrada}"></td>
+																					<td th:text="${seguimiento.h_salida}"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+												</div>
+												<br />
+												<br />
+												<div class="py-2 d-flex justify-content-center">
+													<a class="btn btn-primary  btn-block" th:href="@{/seguimiento_psic_inf/} + ${infante.id}">Hacer seguimiento</a>
+												</div>
+											</div>
+											<div class="card mb-4" th:if="${bitacoras} != null">
+												<div class="card-header">																										
+													<h6 class="m-0 font-weight-bold" id="lista">Datos de las bitacoras</h6>
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Sesión: activate to sort column descending">No. Sesión</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Fecha: activate to sort column descending">Fecha</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Temas: activate to sort column descending">Temas tratados</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Opciones: activate to sort column descending">Opciones</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row" th:each="bitacora : ${bitacoras}">
+																				<td class="sorting_1" th:text="${bitacora.sesion}"></td>
+																					<td th:text="${bitacora.dia  + '/' +  bitacora.mes + '/' + bitacora.anio}"></td>
+																					<td th:text="${bitacora.temas_tratados}"></td>
+																					<td><a
+																						th:href="@{/info_bitacora/} + ${bitacora.id}">Ver más</a></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+												</div>
+												<br />
+												<br />
+												<div class="py-2 d-flex justify-content-center">
+													<a class="btn btn-primary  btn-block" th:href="@{/bitacora_ludico/} + ${perfillus.id}">Hacer nueva bitacora</a>
+												</div>
+											</div>
+											<div th:if="${ultima} != null" sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')">
+												<hr>
+												<div class="d-flex justify-content-center">
+													<h4>La carpeta se ha aperturado con fecha <label th:text="${ultima.fecha}"></label> y folio <label th:text="${ultima.folio}"></label></h4>
+												</div>
+												<br>
+												<br>
+												<div th:if="${archivos} == null" sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')">
+													<div class="alert alert-warning d-flex justify-content-around">
+														<h3>La usuaria no tiene carpetas de investigación</h3>
+														
+														<a class="btn btn-primary" th:href="@{/registrar_archivo/} + ${registro.id}">Registrar archivo</a>
+													
+														
+													</div>
+												</div>
+												<br />
+												<br />
+											<!--	<div class="py-2 d-flex justify-content-center">
+													<a class="btn btn-primary  btn-block" th:href="@{/seguimiento_psic_inf/} + ${infante.id}">Hacer seguimiento</a>
+												</div>
+											</div>-->
+											<div class="card mb-4" th:if="${archivos} != null" sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')">
+												<div class="card-header">																										
+													<h6 class="m-0 font-weight-bold" id="lista">Datos de los seguimientos</h6>
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Delito: activate to sort column descending">Delito</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Medida: activate to sort column descending">Medida de protección</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Justicia: activate to sort column descending">Justicia alternativa</th>
+																							<th class="sorting_asc" tabindex="0"
+																							aria-controls="dataTable" rowspan="1" colspan="1"
+																							aria-sort="ascending"
+																							aria-label="Estado: activate to sort column descending">Estado actual</th>
+																						
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row" th:each="archivo : ${archivos}">
+																				<td class="sorting_1" th:text="${archivo.delito}"></td>
+																					<td th:text="${archivo.medida}"></td>
+																					<td th:text="${archivo.justicia}"></td>
+																					<td th:text="${archivo.estado}"></td>
+																				
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+												</div>
+												<br />
+												<br />
+												<div class="py-2 d-flex justify-content-center">
+													<a class="btn btn-primary  btn-block" th:href="@{/registrar_archivo/} + ${registro.id}">Registrar archivo</a>
+												</div>
+											</div>
+											
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				<br>
+			</div>
+			<footer th:replace="layout/plantilla::footer">
+					
+			</footer>
+		</div>
+	</div>
+	<th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>

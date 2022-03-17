@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+						<h1 class="mt-4">Domicilio del agresor</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Domicicilio</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3>
+										</div>
+										<div class="card-body">
+											<form th:action="@{/domicilio_agresor}" method="post" th:object="${domAgresor}">
+												
+										        <input type="hidden" th:field="*{expediente}"/>
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="calle" class="small mb-1">Calle</label>
+															<input type="text" name="calle" th:field="*{calle}" class="form-control form-control-sm py-4" autocomplete="off" />
+															<small th:if="${#fields.hasErrors('calle')}" class="text-danger" th:errors="*{calle}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="no_exterior" class="small mb-1">Numero exterior</label>
+															<input type="text" name="no_exterior" th:field="*{no_exterior}" pattern="[0-9]+" class="form-control form-control-sm py-4" autocomplete="off" />
+															<small th:if="${#fields.hasErrors('no_exterior')}" class="text-danger" th:errors="*{no_exterior}">Error nombre</small>
+														</div>
+													</div>
+													
+												</div>
+
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="no_interior" class="small mb-1">Numero interior:</label>
+															<input type="text" name="no_interior" th:field="*{no_interior}" pattern="[0-9]+" class="form-control form-control-sm py-4" autocomplete="off"/>
+															<small th:if="${#fields.hasErrors('no_interior')}" class="text-danger" th:errors="*{no_interior}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="colonia" class="small mb-1">Colonia</label>
+															<input type="text" name="colonia" th:field="*{colonia}" class="form-control form-control-sm py-4" autocomplete="off" />
+															<small th:if="${#fields.hasErrors('colonia')}" class="text-danger" th:errors="*{colonia}">Error nombre</small>
+														</div>
+													</div>
+													
+												</div>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="municipio" class="small mb-1">Municipio</label>
+															<input type="text" name="pais" th:field="*{municipio}"  class="form-control form-control-sm py-4" autocomplete="off"/>
+															<small th:if="${#fields.hasErrors('municipio')}" class="text-danger" th:errors="*{municipio}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="estado" class="small mb-1">Estado</label>
+															<input type="text" name="pais" th:field="*{estado}"  class="form-control form-control-sm py-4" autocomplete="off"/>
+															<small th:if="${#fields.hasErrors('estado')}" class="text-danger" th:errors="*{estado}">Error nombre</small>
+														</div>
+													</div>
+	
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="pais" class="small mb-1">Pais</label>
+															<input type="text" name="pais" th:field="*{pais}"  class="form-control form-control-sm py-4" autocomplete="off"/>
+															<small th:if="${#fields.hasErrors('pais')}" class="text-danger" th:errors="*{pais}">Error nombre</small>
+														</div>
+													</div>
+												</div>
+										       
+										       <div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="small mb-1" for="habla">Habla: </label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="fuente_ingreso" id="espaniol"
+																	th:field="*{idioma}" value="español"> <label
+																	class="form-check-label" for="espaniol">
+																	Español </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="fuente_ingreso" id="indigena"
+																	th:field="*{idioma}" value="indigena"> <label
+																	class="form-check-label" for="indigena">
+																	Lengua indigena </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio"
+																	name="fuente_ingreso" id="Extranjera"
+																	th:field="*{idioma}" value="Extranjera"> <label
+																	class="form-check-label" for="Extranjera">
+																	Lengua Extranjera </label>
+															</div>
+															<small th:if="${#fields.hasErrors('idioma')}" class="text-danger" th:errors="*{idioma}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="leer" class="small mb-1">¿Sabe leer?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="leer"
+																	id="leer1" value="Si" th:field="*{leer}"> <label
+																	class="form-check-label" for="leer"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="leer"
+																	id="leer2" value="No" th:field="*{leer}"> <label
+																	class="form-check-label" for="leer"> No </label>
+															</div>
+															<small th:if="${#fields.hasErrors('leer')}" class="text-danger" th:errors="*{leer}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="escribir" class="small mb-1">¿Sabe escribir?</label>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="escribir"
+																	id="escribir1" value="Si" th:field="*{escribir}"> <label
+																	class="form-check-label" for="leer"> Si </label>
+															</div>
+															<div class="form-check">
+																<input class="form-check-input" type="radio" name="escribir"
+																	id="escribir2" value="No" th:field="*{escribir}"> <label
+																	class="form-check-label" for="escribir"> No </label>
+															</div>
+															<small th:if="${#fields.hasErrors('escribir')}" class="text-danger" th:errors="*{escribir}">Error nombre</small>
+														</div>
+													</div>
+											   </div>
+											   
+											   <div class="form-row">
+												   <div class="col-md-4">
+													   <div class="form-group">
+														<label for="escolaridad" class="small mb-1">Escolaridad</label>
+														<input type="text" name="escolaridad" th:field="*{escolaridad}"  class="form-control form-control-sm py-4" autocomplete="off"/>
+														<small th:if="${#fields.hasErrors('escolaridad')}" class="text-danger" th:errors="*{escolaridad}">Error nombre</small>
+														<br/>
+													   </div>
+												   </div>
+												   <div class="col-md-4">
+														<div class="form-group">
+															<label for="serv_medico" class="small mb-1">Servicio medico</label>
+															<input type="text" name="serv_medico" th:field="*{serv_medico}" class="form-control form-control-sm py-4" autocomplete="off" />
+															<small th:if="${#fields.hasErrors('serv_medico')}" class="text-danger" th:errors="*{serv_medico}">Error nombre</small>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="tipo_vivienda" class="small mb-1">Tipo de vivienda</label>
+															<input type="text" name="tipo_vivienda" th:field="*{tipo_vivienda}" class="form-control form-control-sm py-4" autocomplete="off" />
+															<small th:if="${#fields.hasErrors('tipo_vivienda')}" class="text-danger" th:errors="*{tipo_vivienda}">Error nombre</small>
+														</div>
+													</div>
+											   </div>
+										        
+										
+										        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+										    </form>
+    									</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

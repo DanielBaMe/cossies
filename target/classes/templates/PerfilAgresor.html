@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+						<h1 class="mt-4">Perfil del agresor</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Perfil Agresor</li>
+						</ol>
+						
+						<div class="col-mn-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3>
+										</div>
+										<div class="card-body">
+											<form th:action="@{/perfil_agresor}" method="post" th:object="${pAgresor}">
+												<div class="">
+													<div class="form-row">
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="small mb-1">Principal actividad que realiza actualmente:</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="form-row">
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Estudia" th:field="*{princ_actividad}"
+																				value="Estudia" id="Estudia"> <label
+																				class="custom-control-label" for="Estudia">Estudia</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="jubilado" th:field="*{princ_actividad}"
+																				value="jubilado" id="jubilado"> <label
+																				class="custom-control-label" for="jubilado">Jubilado/pensionado</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="hogar" th:field="*{princ_actividad}"
+																				value="trabaja_hogarhogar" id="hogar"> <label
+																				class="custom-control-label" for="hogar">Trabaja en el hogar</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="fhogar" th:field="*{princ_actividad}"
+																				value="fuera_hogar" id="fhogar"> <label
+																				class="custom-control-label" for="fhogar">Trabaja fuera del hogar</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="ilicita" th:field="*{princ_actividad}"
+																				value="actividad_ilicita" id="ilicita"> <label
+																				class="custom-control-label" for="ilicita">Actividad ilicita</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="desconocido" th:field="*{princ_actividad}"
+																				value="Desconocido" id="desconocido"> <label
+																				class="custom-control-label" for="desconocido">Se desconoce</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Ninguna" th:field="*{princ_actividad}"
+																				value="Ninguna" id="Ninguna"> <label
+																				class="custom-control-label" for="Ninguna">Ninguna</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Otro" th:field="*{princ_actividad}"
+																				value="Otro" id="Otro"> <label
+																				class="custom-control-label" for="Otro">Otro</label>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="small mb-1">Principal fuente de ingreso:</label>
+																</div>
+															</div>	
+															<div class="form-group">
+																<div class="form-row">
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Ahorros" th:field="*{princ_ingreso}"
+																				value="Ahorros" id="Ahorros"> <label
+																				class="custom-control-label" for="Ahorros">Ahorros</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Herencia" th:field="*{princ_ingreso}"
+																				value="Herencia" id="Herencia"> <label
+																				class="custom-control-label" for="Herencia">Herencia</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Pensiones" th:field="*{princ_ingreso}"
+																				value="Pensiones" id="Pensiones"> <label
+																				class="custom-control-label" for="Pensiones">Pensiones</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Remesas" th:field="*{princ_ingreso}"
+																				value="Remesas" id="Remesas"> <label
+																				class="custom-control-label" for="Remesas">Remesas</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Rentas" th:field="*{princ_ingreso}"
+																				value="Rentas" id="Rentas"> <label
+																				class="custom-control-label" for="Rentas">Rentas</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="formal" th:field="*{princ_ingreso}"
+																				value="trabajo_formal" id="formal"> <label
+																				class="custom-control-label" for="formal">Trabajo formal</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="informal" th:field="*{princ_ingreso}"
+																				value="trabajo_informal" id="informal"> <label
+																				class="custom-control-label" for="informal">Trabajo informal</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Otro" th:field="*{princ_ingreso}"
+																				value="Otro" id="Otro2"> <label
+																				class="custom-control-label" for="Otro2">Otro</label>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													
+													</div>
+												</div>
+												
+												<div class="form-row">
+													
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="princ_ingreso" class="small mb-1">Cual/cuanto mensual?</label>
+															<input type="number" name="ingreso_mensual" th:field="*{ingreso_mensual}" class="form-control form-control-sm py-4" autocomplete="off" required/>
+															<small th:if="${#fields.hasErrors('ingreso_mensual')}" class="text-danger" th:errors="*{ingreso_mensual}">Error nombre</small>
+														</div>
+													</div>
+													
+												</div>
+									
+										
+										        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+										    </form>
+    									</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

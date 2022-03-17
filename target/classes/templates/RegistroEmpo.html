@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Registro de empoderamiento</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+                            <li class="breadcrumb-item active">Registro al área</li>
+                        </ol>
+                        <div class="col-mb-4">
+                            <div class="justify-content-center">
+                                <div class="col-mb-4">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-3">
+                                        <div class="card-header">
+                                            <h3 class="text-center font-weight-light my-2" id="preHeader">Área de Empoderamiento</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <form th:action="@{/registro_empoderamiento}" method="post" th:object="${empoderamiento}">
+                                                <div class="errorblock alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                                    <ul>
+                                                        <li th:each="err : ${#fields.errors('*')}"
+                                                            th:text="${err}" class="text-danger">Input is incorrect</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="hora_entrada">Hora de entrada</label>
+                                                            <input class="form-control" type="time" name="hora_entrada" th:field="*{hora_entrada}" required/>
+                                                            <small th:if="${#fields.hasErrors('hora_entrada')}" th:errors="*{hora_entrada}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="hora_salida">Hora de salida</label>
+                                                            <input class="form-control" type="time" name="hora_salida" th:field="*{hora_salida}" required/>
+                                                            <small th:if="${#fields.hasErrors('hora_salida')}" th:errors="*{hora_salida}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <h3 class="text-center">Datos académicos</h3>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="escolaridad">Escolaridad</label>
+                                                            <input class="form-control" type="text" name="escolaridad" th:field="*{escolaridad}" autocomplete="off"  required/>
+                                                            <small th:if="${#fields.hasErrors('escolaridad')}" th:errors="*{escolaridad}" class="text-danger">Error nombre</small>  
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="certificado">Certificado</label>
+                                                            <input class="form-control" type="text" name="certificado" th:field="*{certificado}" autocomplete="off" required/>
+                                                            <small th:if="${#fields.hasErrors('certificado')}" th:errors="*{certificado}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="escuela">Estudios que esté efectuando en la actualidad</label>
+                                                    <input class="form-control" type="text" name="escuela" th:field="*{est_actuales_escuela}" autocomplete="off" />
+                                                    <small th:if="${#fields.hasErrors('est_actuales_escuela')}" th:errors="*{est_actuales_escuela}" class="text-danger">Error nombre</small>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col d-4">
+                                                        <div class="form-group">
+                                                            <label for="horario">Horario</label>
+                                                            <input class="form-control" type="text" name="horario" th:field="*{est_actuales_horario}" />
+                                                            <small th:if="${#fields.hasErrors('est_actuales_horario')}" th:errors="*{est_actuales_horario}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col d-4">
+                                                        <div class="form-group">
+                                                            <label for="curso">Curso/carrera</label>
+                                                            <input class="form-control" type="text" name="curso" th:field="*{est_actuales_curso}" autocomplete="off"/>
+                                                            <small th:if="${#fields.hasErrors('est_actuales_curso')}" th:errors="*{est_actuales_curso}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col d-4">
+                                                        <div class="form-group">
+                                                            <label for="grado">Grado</label>
+                                                            <input class="form-control" type="text" name="grado" th:field="*{est_actuales_grado}" autocomplete="off"/>
+                                                            <small th:if="${#fields.hasErrors('est_actuales_grado')}" th:errors="*{est_actuales_grado}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <h3 class="text-center">Datos laborales</h3>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="experiencia">Tiene experiencia laboral</label>
+                                                            <input class="form-control" type="text" name="experiencia" th:field="*{exp_laboral}" autocomplete="off"/>
+                                                            <small th:if="${#fields.hasErrors('exp_laboral')}" th:errors="*{exp_laboral}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="empleo">Datos de su último empleo</label>
+                                                            <input class="form-control" type="text" name="empleo" th:field="*{ultimo_empleo}" autocomplete="off" />
+                                                            <small th:if="${#fields.hasErrors('ultimo_empleo')}" th:errors="*{ultimo_empleo}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="ocupacion">Ocupación</label>
+                                                            <input class="form-control" type="text" name="estado" th:field="*{ocupacion}" autocomplete="off" />
+                                                            <small th:if="${#fields.hasErrors('ocupacion')}" th:errors="*{ocupacion}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="negocio">Desarrolla algún negocio propio, mencione cual</label>
+                                                            <input class="form-control" type="text" name="negocio" th:field="*{desarrolla_negocio}" autocomplete="off" />
+                                                            <small th:if="${#fields.hasErrors('desarrolla_negocio')}" th:errors="*{desarrolla_negocio}" class="text-danger">Error nombre</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="habilidades">Habilidades</label>
+                                                    <input class="form-control" type="text" name="habilidades" th:field="*{habilidades}" autocomplete="off" />
+                                                    <small th:if="${#fields.hasErrors('habilidades')}" th:errors="*{habilidades}" class="text-danger">Error nombre</small>
+                                                </div>
+                                                <hr>
+                                                <div class="row pb-3">
+                                                    <div class="col-md-4">
+                                                        <label for="escolar">Escolar</label>
+                                                        <input class="form-control" type="text" name="escolar" th:field="*{apoyo_escolar}" autocomplete="off" />
+                                                        <small th:if="${#fields.hasErrors('apoyo_escolar')}" th:errors="*{apoyo_escolar}" class="text-danger">Error nombre</small>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="trabajo">Bolsa de trabajo</label>
+                                                        <input class="form-control" type="text" name="trabajo" th:field="*{apoyo_trabajo}" autocomplete="off" />
+                                                        <small th:if="${#fields.hasErrors('apoyo_trabajo')}" th:errors="*{apoyo_trabajo}" class="text-danger">Error nombre</small>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="canalizacion">Canalización</label>
+                                                        <input class="form-control" type="text" name="canalizacion" th:field="*{canalizacion}" autocomplete="off"  />
+                                                        <small th:if="${#fields.hasErrors('canalizacion')}" th:errors="*{canalizacion}" class="text-danger">Error nombre</small>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" th:field="*{usuaria}" />
+                                                <div class="form-group mt-4 mb-0">
+                                                    <button type="submit" class="btn btn-save btn-block">
+                                                        <i class="fas fa-save"></i> Agregar
+                                                    </button>
+                                                    
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <br>
+                </div>
+                <footer th:replace="layout/plantilla::footer">
+            
+                </footer>
+            </div>
+        </div>
+        <th:block th:replace="layout/plantilla::script"></th:block>  
+    </body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla :: header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+                    <!--  -->
+						<h1 class="mt-4">Efectos de la violencia</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Efectos</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3>
+										</div>
+										<div class="card-body">
+						                    <form th:action="@{/crearEfectos}" method="post" th:object="${violencia}">
+						                        <input type="hidden" th:field="*{expediente}">
+						                        <label for="efectos" class="small mb-1">Efectos económicos y patrimoniales</label>
+												<input type="text" name="efectos" th:field="*{efectos}" class="form-control form-control-sm py-4"
+												pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" title="Solo letras" autocomplete="off"/>
+						                        <span th:if="${#fields.hasErrors('efectos')}" th:errors="*{efectos}">Error nombre</span>
+						                        <br/>
+						
+												
+												<div class="">
+													<div class="form-row">
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="small mb-1">Efectos fisicos:</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="form-row">
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Abortos" th:field="*{efectos_fisicos}"
+																				value="Abortos" id="Abortos"> <label
+																				class="custom-control-label" for="Abortos">Abortos</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Amputaciones" th:field="*{efectos_fisicos}"
+																				value="Amputaciones" id="Amputaciones"> <label
+																				class="custom-control-label" for="Amputaciones">Amputaciones</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Cicatrices" th:field="*{efectos_fisicos}"
+																				value="Cicatrices" id="Cicatrices"> <label
+																				class="custom-control-label" for="Cicatrices">Cicatrices</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="cont" th:field="*{efectos_fisicos}"
+																				value="Contusión" id="cont"> <label
+																				class="custom-control-label" for="cont">Contusión</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Fractura" th:field="*{efectos_fisicos}"
+																				value="Fractura" id="Fractura"> <label
+																				class="custom-control-label" for="Fractura">Fractura</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Herida" th:field="*{efectos_fisicos}"
+																				value="Herida" id="Herida"> <label
+																				class="custom-control-label" for="Herida">Herida</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="dolorC" th:field="*{efectos_fisicos}"
+																				value="dolor_cabeza" id="dolorC"> <label
+																				class="custom-control-label" for="dolorC">Dolor de cabeza</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Ninguno" th:field="*{efectos_fisicos}"
+																				value="Ninguno" id="Ninguno"> <label
+																				class="custom-control-label" for="Ninguno">Ninguno</label>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="small mb-1">Efectos psicologicos:</label>
+																</div>
+															</div>	
+															<div class="form-group">
+																<div class="form-row">
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="angustia" th:field="*{efectos_psic}"
+																				value="angustia" id="angustia"> <label
+																				class="custom-control-label" for="angustia">Angustia o miedo</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Depresión" th:field="*{efectos_psic}"
+																				value="Depresión" id="Depresión"> <label
+																				class="custom-control-label" for="Depresión">Depresión</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="Ansiedad" th:field="*{efectos_psic}"
+																				value="Ansiedad" id="Ansiedad"> <label
+																				class="custom-control-label" for="Ansiedad">Ansiedad</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="transtorno" th:field="*{efectos_psic}"
+																				value="transtorno_sueño" id="transtorno"> <label
+																				class="custom-control-label" for="transtorno">Transtorno de sueño</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="estres" th:field="*{efectos_psic}"
+																				value="estres_postraumatico" id="estres"> <label
+																				class="custom-control-label" for="estres">Estrés Postraumatico</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="suicida" th:field="*{efectos_psic}"
+																				value="ideacion_suicida" id="suicida"> <label
+																				class="custom-control-label" for="suicida">Ideación suicida</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="intentoS" th:field="*{efectos_psic}"
+																				value="intento_suicida" id="intentoS"> <label
+																				class="custom-control-label" for="intentoS">Intento suicida</label>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="custom-control custom-checkbox">
+																			<input type="checkbox" class="custom-control-input"
+																				name="peso" th:field="*{efectos_psic}"
+																				value="peso" id="peso"> <label
+																				class="custom-control-label" for="peso">Perdida o aumento de peso</label>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													
+													</div>
+												</div>
+						                        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+						                    </form>
+						                </div>
+						            </div>
+						        </div>
+						    </div>
+						 </div>
+					</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+    <th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

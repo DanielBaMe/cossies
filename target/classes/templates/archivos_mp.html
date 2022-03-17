@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla::header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+	                <div class="container-fluid">
+						<h1 class="mt-4">Archivo</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Archivos MP</li>
+						</ol>
+
+						<div class="card-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Información</h3>
+										</div>
+										<div class="card-body">
+						                    <form th:action="@{/guardar_archivo}" method="post" th:object="${archivo}">
+									
+												
+												<div class="form-row">
+						                        	<div class="col-md-6">
+														<div class="form-group">
+															<label for="delito" class="small mb-1">Delito</label>
+															<textarea type="text" name="delito" th:field="*{delito}" class="form-control form-control-sm" autocomplete="off"
+															></textarea>
+															
+														</div>
+						                        		
+													</div>
+													<div class="col-md-6">
+						                        		<div class="form-group">
+															<label for="medida" class="small mb-1">Medida de protección</label>
+															<textarea type="text" name="medida" th:field="*{medida}" class="form-control form-control-sm" autocomplete="off"
+														></textarea>
+															
+														</div>
+													</div>
+													<div class="col-md-6">
+						                        		<div class="form-group">
+															<label for="justicia" class="small mb-1">Justicia alternativa</label>
+															<textarea type="text" name="justicia" th:field="*{justicia}" class="form-control form-control-sm" autocomplete="off"
+														></textarea>
+														
+														</div>
+													</div>
+													<div class="col-md-6">
+						                        		<div class="form-group">
+															<label for="estado" class="small mb-1">Estado actual</label>
+															<textarea type="text" name="estado" th:field="*{estado}" class="form-control form-control-sm" autocomplete="off"
+															 ></textarea>
+															
+														</div>
+													</div>
+													<input type="hidden" th:field="*{usuaria}">
+													<input type="hidden" th:field="*{imputado}">
+												</div>             
+						                        <div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+												</div>
+											</form>
+										</div>
+										<br>
+										<div th:if="*{band} == true" class="alert alert-success text-center d-flex justify-content-around">
+											<h5>
+												Apoyo agregado correctamente
+											</h5>
+											<a th:href="@{/narracion_hechos}" class="btn btn-primary">Siguiente formulario</a>
+										</div>
+										<br>
+										<div class="card mb-4" th:if="${registros != null}">
+											<div class="card-header">																										
+												<h6 class="m-0 font-weight-bold" id="lista">Lista de red de apoyo</h6>
+											</div>
+											<div class="card-body">
+												<div class="table-responsive">
+													<div id="dataTable_wrapper"
+														class="dataTables_wrapper dt-bootstrap4">
+														<div class="row">
+															<div class="col-sm-12">
+																<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																	<thead>
+																		<tr role="row">
+																			<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Nombre: activate to sort column descending">
+																				Nombre</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Telefono: activate to sort column ascending">
+																				Telefono</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Dirección: activate to sort column ascending">
+																				Dirección</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Parentesco activate to sort column ascending">
+																				Parentesco</th>
+																			<th class="sorting" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-label="Tipod de apoyo activate to sort column ascending">
+																				Tipo de apoyo</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr role="row" 
+																			th:each="registro : ${registros}">
+																			<td class="sorting_1" th:text="${registro.nombre}"></td>
+																			<td th:text="${registro.telefono}"></td>
+																			<td th:text="${registro.direccion}"></td>
+																			<td th:text="${registro.parentesco}"></td>
+																			<td th:text="${registro.tipo_apoyo}"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+						                    
+            						</div>
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+
+    <th:block th:replace="layout/plantilla::script"></th:block>  
+</body>
+</html>

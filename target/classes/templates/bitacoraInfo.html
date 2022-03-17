@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+    <header th:replace="layout/plantilla::header">
+    </header>
+    <div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+            
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Bitácora</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+                            <li class="breadcrumb-item active">Bitacora</li>
+                        </ol>
+                        <div class="col-mb-4">
+                            <div class="justify-content-center">
+                                <div class="col-mb-4">
+                                    <div class="card shadow-lg border-0 rounded-lg mt-3">
+                                        <div class="card-header">
+                                            <h3 class="text-center font-weight-light my-2" id="preHeader">Bitácora de <span th:text="${ludico.nombre}"></span></h3>
+                                        </div>
+                                        <div class="card-body">
+
+                                                <h3 class="text-center font-weight-light">Temas que se trabajaron</h3>
+                                                <span class="form-control form-control-sm py-4" 
+                                                     type="text" name="temas_tratados" th:text="${bitacora.temas_tratados}"  />
+                                                    
+                                                <hr>
+                                                <h3 class="text-center font-weight-light">En relación a lo planeado</h3>
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="desarrollo">Desarrollo de las actividades en tiempo y forma</label>
+                                                            <span class="form-control form-control-sm py-4" 
+                                                             type="text" name="desarrollo" th::text="${bitacora.desarrollo_actividades}" required/>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="realizado">Se llevó a cabo lo planeado</label>
+                                                            <span class="form-control form-control-sm py-4"autocomplete="off"
+                                                             type="text" name="realizado" th:text="${bitacora.realizado}"  required/>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="small mb-1"for="material">El material fue adecuado</label>
+                                                    <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                     type="text" name="material" th:text="${bitacora.material}"  required/>
+                                                 
+                                                </div>
+                                                <hr>
+                                                <h3 class="text-center font-weight-light">Manifestaciones de la niña/o</h3>
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="actividades">Las actividades fueron interesantes y retadoras</label>
+                                                            <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                             type="text" name="actividades" th:text="${bitacora.actividades}"  required/>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="involucrado">Se involucró</label>
+                                                            <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                            type="text" name="involucrado" th:text="${bitacora.involucrado}"  required/>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="disposicion">Tiene disposición para trabajar</label>
+                                                            <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                            type="text" name="disposicion" th:text="${bitacora.disposicion}"  required/>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="empatia">Muestra empatia</label>
+                                                            <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                            type="text" name="empatia" th:text="${bitacora.empatia}"  required/>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="small mb-1"for="actitud">Su actitud ante las actividades</label>
+                                                    <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                    type="text" name="actitud" th:text="${bitacora.actitud}"  required/>
+                                                 
+                                                </div>
+                                                <hr>
+                                                <h3 class="text-center font-weight-light">Mi intervención</h3>
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="interaccion">Mi interacción fue la mejor</label>
+                                                            <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                            type="text" name="interaccion" th:text="${bitacora.interaccion}"  required/>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label  class="small mb-1"for="consignas_actividades">Las consignas y actividades resultaron claras</label>
+                                                            <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                            type="text" name="consignas_actividades" th:text="${bitacora.consignas_actividades}"  required/>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="small mb-1"for="convivencia">Motivé la convivencia sana, pacifica y formativa</label>
+                                                    <span class="form-control form-control-sm py-4" autocomplete="off"
+                                                    type="text" name="convivencia" th:text="${bitacora.convivencia}"  required/>
+                                                    
+                                                </div>
+                                                <hr>
+                                                <h3 class="text-center font-weight-light">Observaciones</h3>
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="logros">Logros</label>
+                                                            <span class="form-control form-control-sm py-4" 
+                                                            rows="" cols=""th:text="${bitacora.logros}" name="logros" required></span>
+                                                           
+                                                        </div>    
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="small mb-1" for="dificultades">Dificultades</label>
+                                                            <span class="form-control form-control-sm py-4" 
+                                                            th:text="${bitacora.dificultades}" name="dificultades" required></span>
+                                                           
+                                                        </div>
+                        
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+                        
+            </footer>
+        </div>
+    </div>    
+
+    <th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>

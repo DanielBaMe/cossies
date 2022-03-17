@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla::header">
+	</header>
+	<div id="layoutSidenav">
+		<div th:replace="layout/plantilla::aside">
+			
+		</div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<div class="container-fluid">
+						<h1 class="mt-4">Búsqueda de Usuaria</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item active">Inicio</li>
+						</ol>
+						
+						<div class="card mb-4">
+							<div class="row justify-content-center">
+								<div class="col-lg-12">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<!-- <div class=""></div> -->
+										<div class="card-body">
+											<form method="post" th:action="@{/buscar}">
+												<div class="form-row">
+													<div class="col-md-8">
+														<label class="small mb-1" for="inputNombreUsuaria"><h4>Nombre
+																de la usuaria</h4></label>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="input-group mb-3">
+															<input type="text" class="form-control" name="nombre"
+																id="nombre" aria-label="Recipient's username"
+																aria-describedby="basic-addon2" autocomplete="off">
+															<div class="input-group-append">
+																<button class="btn btn-outline-secondary" type="submit">
+																	<i class="fas fa-search"></i> Buscar
+																</button>
+																
+															</div>
+														</div>
+													</div>
+													
+												</div>
+												<!--<div class="form-row" sec:authorize="hasRole('ROLE_LUD')">
+													<div class="col-md-8">														
+														<a href="preRegistro" class="btn btn-outline-primary" role="button" aria-pressed="true">
+															<i class="fas fa-plus"></i> Agregar usuaria
+														</a>
+														 <a href="#" class="btn btn-outline-secondary" role="button" aria-pressed="true">
+															<i class="fas fa-eye"></i> Ver usuarias
+														</a> 
+													</div>
+												</div>-->
+											</form>
+											<div th:if="${clave} == true" class="alert alert-success"
+											role="alert">La contraseña se ha modificado correctamente.</div>	
+											<div th:if="${registrado} == true" class="alert alert-success"
+											role="alert">La usuaria ha sido registrada correctamente.</div>
+											<div th:if="${listo} == true" class="alert alert-success"
+											role="alert">El expediente ha sido creado correctamente.</div>		
+											<div th:if="${seg} == true" class="alert alert-success"
+											role="alert">El seguimiento se ha guardado correctamente.</div>	
+											<div th:if="${segInf} == true" class="alert alert-success"
+											role="alert">El seguimiento se ha guardado correctamente.</div>	
+											<div th:if="${val} == true" class="alert alert-success"
+											role="alert">La valoración se ha guardado correctamente.</div>
+											<div th:if="${regLud} == true" class="alert alert-success"
+											role="alert">El registro lúdico se ha guardado correctamente.</div>	
+											<div th:if="${empoderamiento} == true" class="alert alert-success"
+											role="alert">El registro de empoderamiento se ha guardado correctamente.</div>
+											<div th:if="${segEmp} == true" class="alert alert-success"
+											role="alert">El seguimiento de empoderamiento se ha guardado correctamente.</div>
+											<div th:if="${seguimientoJudHecho} == true" class="alert alert-success"
+											role="alert">El seguimiento se ha guardado correctamente.</div>		
+											<div th:if="${carpetaMPHecho} == true" class="alert alert-success"
+											role="alert">La carpeta de investigación se ha guardado correctamente.</div>	
+											<div th:if="${editCita} == true" class="alert alert-success"
+											role="alert">
+												La cita de la usuaria <label th:text="${citaUsuaria}"></label> se ha editado correctamente.
+											</div>
+											<div th:if="${editCitaN} == true" class="alert alert-success"
+											role="alert">
+												La cita del niñ@ <label th:text="${citaNino}"></label> se ha editado correctamente.
+											</div>
+											<div th:if="${suma} != null" class="alert alert-warning"
+											role="alert">
+												<label th:text="${suma}"></label> <br>
+												<!--<span th:if="${suma} == Relación abusiva"> Existencia de problemas en los hogres, pero que se resuleven con violencia fisica.</span>
+												<span th:if="${suma} == Primer nivel de abuso"> La violencia en la relación está comenzando. Es una situación de  y un indicador de que la violencia puede aumentar en el futuro.</span>
+												<span th:if="${suma} == Abuso severo"> En este punto es importante solicitar ayuda institucional o personal y abandonar la casa temporalmente.</span>
+												<span th:if="${suma} == Abuso peligroso!"> </span>-->
+											</div>
+											<form method="post" th:action="@{/buscar_ninio}" sec:authorize="hasAnyRole('ROLE_LUD', 'ROLE_JLUD')">
+												<div class="form-row">
+													<div class="col-md-8">
+														<label class="small mb-1" for="inputNombreHijo"><h4>Nombre
+																del niño</h4></label>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="input-group mb-3">
+															<input type="text" class="form-control" name="nombre"
+																id="nombreHijo" aria-label="Recipient's username"
+																aria-describedby="basic-addon2" autocomplete="off">
+															<div class="input-group-append">
+																<button class="btn btn-outline-secondary" type="submit">
+																	<i class="fas fa-search"></i> Buscar
+																</button>	
+															</div>
+														</div>
+													</div>
+												</div>	
+											</form>
+											<form method="post" th:action="@{/buscar_ninio_psic}" sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')">
+												<div class="form-row">
+													<div class="col-md-8">
+														<label class="small mb-1" for="inputNombreHijo"><h4>Nombre
+																del niño</h4></label>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="input-group mb-3">
+															<input type="text" class="form-control" name="nombreNi"
+																id="nombreHijo" aria-label="Recipient's username"
+																aria-describedby="basic-addon2" autocomplete="off">
+															<div class="input-group-append">
+																<button class="btn btn-outline-secondary" type="submit">
+																	<i class="fas fa-search"></i> Buscar
+																</button>	
+															</div>
+														</div>
+													</div>
+												</div>	
+											</form>
+											<div th:if="${bitacora} == true" class="alert alert-success"
+											role="alert">La bitacora se ha guardado correctamente.</div>
+												
+											<br>
+											<ol class="breadcrumb mb-2"></ol>
+											<!-- TABLA -->
+											<div class="card mb-4" th:if="${ludicos} != null">
+												<div class="card-header">																										
+													<h6 class="m-0 font-weight-bold" id="lista">Lista de niños</h6>
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Nombre: activate to sort column descending">Nombre</th>
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Edad: activate to sort column descending">Edad</th>
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Direccióm: activate to sort column descending">Direccion</th>
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Ocupación: activate to sort column descending">Ocupacion</th>
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Opciones: activate to sort column descending">Opciones</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row" 
+																			th:each="ludico : ${ludicos}">
+																				<td class="sorting_1" th:text="${ludico.nombre}"></td>
+																				<td th:text="${ludico.edad}"></td>
+																				<td th:text="${ludico.domicilio}"></td>
+																				<td th:text="${ludico.ocupacion}"></td>
+																				<td sec:authorize="hasAnyRole('ROLE_LUD', 'ROLE_JLUD')"><a
+																					th:href="@{/perfil_lud_nino/} + ${ludico.id}">Ver perfil</a></td>
+																				<!--<td sec:authorize="hasAnyRole('ROLE_LUD', 'ROLE_JLUD')"><a
+																					th:href="@{/bitacora_ludico/} + ${ludico.id}">Hacer Bitacora</a></td>-->
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card mb-4" th:if="${ninos} != null">
+												<div class="card-header">																										
+													<h6 class="m-0 font-weight-bold" id="lista">Lista de niños</h6>
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																	id="dataTable" width="100%" cellspacing="0"
+																	role="grid" aria-describedby="dataTable_info"
+																	style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Nombre: activate to sort column descending">Nombre</th>
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Edad: activate to sort column descending">Edad</th>
+						
+																				<th class="sorting_asc" tabindex="0"
+																				aria-controls="dataTable" rowspan="1" colspan="1"
+																				aria-sort="ascending"
+																				aria-label="Opciones: activate to sort column descending">Opciones</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row" 
+																			th:each="nino : ${ninos}">
+																				<td class="sorting_1" th:text="${nino.nombre}"></td>
+																				<td th:text="${nino.edad}"></td>
+																				<td sec:authorize="hasAnyRole('ROLE_PSIC', 'ROLE_JPSIC')"><a
+																					th:href="@{/info_nino/} + ${nino.id}">Ver información</a></td>
+																				
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card mb-4" th:if="${registros != null}">
+												<div class="card-header">																										
+													<h6 class="m-0 font-weight-bold" id="lista">Lista de usuarias</h6>
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<div id="dataTable_wrapper"
+															class="dataTables_wrapper dt-bootstrap4">
+															<div class="row">
+																<div class="col-sm-12">
+																	<table class="table table-bordered dataTable"
+																		id="dataTable" width="100%" cellspacing="0"
+																		role="grid" aria-describedby="dataTable_info"
+																		style="width: 100%;">
+																		<thead>
+																			<tr role="row">
+																				<th class="sorting_asc" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-sort="ascending"
+																					aria-label="Nombre: activate to sort column descending">
+																					Nombre</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Edad activate to sort column ascending">
+																					Edad</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Estado civil: activate to sort column ascending">
+																					Estado civil</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Telefono: activate to sort column ascending">
+																					Teléfono</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="CURP: activate to sort column ascending">
+																					CURP</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Motivo de la visita: activate to sort column ascending">
+																					Motivo de la visita</th>
+																				<th class="sorting" tabindex="0"
+																					aria-controls="dataTable" rowspan="1" colspan="1"
+																					aria-label="Motivo de la visita: activate to sort column ascending">
+																					Ver información</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr role="row" 
+																				th:each="registro : ${registros}">
+																				<td class="sorting_1" th:text="${registro.nombre}"></td>
+																				<td th:text="${registro.edad}"></td>
+																				<td th:text="${registro.id_estado_civil}"></td>
+																				<td th:text="${registro.telefono}"></td>
+																				<td th:text="${registro.curp}"></td>
+																				<td th:text="${registro.motivo_visita}"></td>
+																				<td sec:authorize="hasAnyRole('ROLE_TS', 'ROLE_JTS')">
+																					<a th:href="@{/perfil_usuaria/} + ${registro.id}">Ver usuaria</a>
+																				</td>
+																				<td sec:authorize="hasAnyRole('ROLE_JPSIC', 'ROLE_PSIC')"><a
+																					th:href="@{/ver_psic/} + ${registro.id}">Ver Usuaria</a></td>
+																				<td sec:authorize="hasAnyRole('ROLE_EMP', 'ROLE_JEMP')"><a
+																					th:href="@{/perfil_emp/} + ${registro.id}">Ver Usuaria</a></td>
+																				<td sec:authorize="hasAnyRole('ROLE_LUD', 'ROLE_JLUD')"><a
+																					th:href="@{/perfil_ludico/} + ${registro.id}">Ver usuaria</a></td>
+																				<td sec:authorize="hasAnyRole('ROLE_JUD', 'ROLE_JJUD')"><a
+																						th:href="@{/perfil_juridico/} + ${registro.id}">Ver usuaria</a></td>
+																				<td sec:authorize="hasAnyRole('ROLE_MP', 'ROLE_JMP')"><a
+																						th:href="@{/perfil_mp/} + ${registro.id}">Ver usuaria</a></td>		
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- FIN TABLA -->
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				<br>
+			</div>
+			<footer th:replace="layout/plantilla::footer">
+					
+			</footer>
+		</div>
+	</div>
+	<th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla :: header"> </header>
+	<div id="layoutSidenav">
+        <div th:replace="layout/plantilla::aside">
+                
+        </div>
+        <div id="layoutSidenav_content">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container-fluid">
+						<h1 class="mt-4">Datos del agresor</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item">Inicio</li>
+							<li class="breadcrumb-item">Perfil</li>
+							<li class="breadcrumb-item active">Información detallada</li>
+						</ol>
+						
+						<div class="col-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											<h3 class="text-center font-weight-light my-2" id="preHeader">Datos</h3>
+										</div>
+										<div class="card-body">
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Nombre
+															</label> 
+															<span class="small" th:text="${agresor.nombres} + ' ' + ${agresor.apellido_paterno} + ' ' +  ${agresor.apellido_materno}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Fecha de nacimiento
+															</label> <span class="small"  th:text="${agresor.fecha_nacimiento}"></span>
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Edad
+															</label> <span class="small"  th:text="${agresor.edad}"></span>
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Estado civil
+															</label> <span class="small"  th:text="${agresor.estado_civil}"></span>	
+														</div>
+														
+													</div>
+													
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Nacionalidad
+															</label> <span class="small"  th:text="${agresor.nacionalidad}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Seudonimo
+															</label>
+														
+															<span class="small"  th:text="${agresor.seudonimo}"></span>
+														
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Grupo etnico
+															</label>
+															<span class="small"  th:text="${agresor.grupo_etnico}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Sexo
+															</label>
+															<span class="small"  th:text="${agresor.sexo}"></span>
+																
+														</div>
+													</div>
+														
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Relación con la victima
+															</label>
+															<span class="small"  th:text="${agresor.relacion_victima}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">La usuaria conoce al agresor
+															</label>
+															<span class="small"  th:text="${agresor.conoce_agresor}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Informacion adicional
+															</label>
+															<span class="small"  th:text="${agresor.info_adicional}"></span>
+																
+														</div>
+													</div>
+												</div>
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Domicilio</li>
+												</ol>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">País
+															</label>
+															<span class="small"  th:text="${domicilio.pais}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Estado
+															</label>
+															<span class="small"  th:text="${domicilio.estado}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Municipio
+															</label> <span class="small"  th:text="${domicilio.municipio}"></span>
+																
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Colonia
+															</label> <span class="small"  th:text="${domicilio.colonia}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Calle
+															</label> <span class="small"  th:text="${domicilio.calle}"></span>
+																
+														</div>
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName"> Número exterior
+															</label> 
+															<span class="small"  th:text="${domicilio.no_exterior}"></span>
+																
+														</div>
+
+													</div>
+													<div class="col-md-4">
+														
+														<div class="form-group">
+															<label class="font-weight-bold" for="inputFirstName">Número interior
+															</label> 
+															<span class="small"  th:text="${domicilio.no_interior}"></span>
+																
+														</div>
+														
+													</div>
+												</div>
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Formación
+														Educativa</li>
+												</ol>
+												<div class="">
+													<div class="form-row">
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold" for="radioLeer">¿Sabe
+																		leer? </label>
+																		<span class="small"  th:text="${domicilio.leer}"></span>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold" for="radioEscribir">¿Sabe
+																		escribir? </label>
+																		<span class="small"  th:text="${domicilio.escribir}"></span>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold" for="selectEscolaridad">Escolaridad:</label>
+																	<span class="small"  th:text="${domicilio.escolaridad}"></span>
+																</div>
+															</div>
+														</div>
+														
+														
+													</div>
+													
+											
+													
+												</div>
+												
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Datos Económicos</li>
+												</ol>
+												<div class="">
+													<div class="form-row">
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">Servicio médico con el
+																		que cuenta:</label>
+																		<span class="small"  th:text="${domicilio.serv_medico}"></span>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label for="tipo_vivienda" class="font-weight-bold">Tipo de vivienda</label>
+																		<span class="small"  th:text="${domicilio.tipo_vivienda}"></span>
+																 </div>
+															</div>
+														</div>
+													</div>
+												</div>
+											
+												
+												 
+												 <ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Perfil del agresor</li>
+												</ol>
+												 <div class="">
+													<div class="form-row">
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">Principal actividad que realiza actualmente:</label>
+																	<span class="small"  th:text="${perfil.princ_actividad}"></span>
+																</div>
+															</div>
+															
+														
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">Principal fuente de ingreso:</label>
+																	<span class="small"  th:text="${perfil.princ_ingreso}"></span>
+																</div>
+															</div>	
+															
+														</div>
+														<div class="col-md-4">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">Cual/cuanto mensual?</label>
+																	<span class="small"  th:text="${perfil.ingreso_mensual}"></span>
+																
+																</div>
+															</div>
+															
+														</div>
+													</div>
+												</div>
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Factor de riesgo</li>
+												</ol>
+												<div class="">
+													<div class="form-row">
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">Durante la agresion estaba bajo el efecto de alguna droga o alcohol?</label>
+																	<span class="small"  th:text="${perfil.ingreso_mensual}"></span>
+																	
+																</div>
+															</div>
+															
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">La consume de manera cotidiana?</label>
+																	<span class="small"  th:text="${perfil.ingreso_mensual}"></span>
+																</div>
+															</div>
+															
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">Cual?</label>
+																	<span class="small"  th:text="${perfil.ingreso_mensual}"></span>
+																</div>
+															</div>
+															
+														</div>
+														<div class="col-md-6">
+															<div class="col-md-4">
+																<div class="form-group">
+																	<label class="font-weight-bold">Posee algun tipo de armas?</label>
+																	<span class="small"  th:text="${perfil.ingreso_mensual}"></span>
+																</div>
+															</div>
+															
+														</div>
+													</div>
+													
+												</div>
+												
+
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Fijaciones del agresor</li>
+												</ol>
+
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold">Tez</label>
+															<span class="small"  th:text="${filiacion.tez}"></span>
+														</div>
+														
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label  class="font-weight-bold">Ojos</label>
+															<span class="small"  th:text="${filiacion.ojos}"></span>
+														</div>
+														
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label class="font-weight-bold">Cara</label>
+															<span class="small"  th:text="${filiacion.cara}"></span>
+														</div>
+														
+													</div>
+												</div>
+												
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label  class="font-weight-bold">Nariz</label>
+															<span class="small"  th:text="${filiacion.nariz}"></span>
+														</div>
+														
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label  class="font-weight-bold">Cabello</label>
+															<span class="small"  th:text="${filiacion.cabello}"></span>
+														</div>
+														
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label  class="font-weight-bold">Boca</label>
+															<span class="small"  th:text="${filiacion.boca}"></span>
+														</div>
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label  class="font-weight-bold">Estatura</label>
+															<span class="small"  th:text="${filiacion.estatura}"></span>
+														</div>
+														
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label  class="font-weight-bold">Señas particulares</label>
+															<span class="small"  th:text="${filiacion.senia_particular}"></span>
+														</div>
+														
+													</div>
+												</div>
+										</div>
+                					</div>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                </main>
+                <br>
+            </div>
+            <footer th:replace="layout/plantilla::footer">
+            
+            </footer>
+        </div>
+    </div>
+<th:block th:replace="layout/plantilla::script"></th:block> 
+</body>
+</html>

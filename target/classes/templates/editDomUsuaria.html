@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body>
+	<header th:replace="layout/plantilla::header">
+	</header>
+	<div id="layoutSidenav">
+		<div th:replace="layout/plantilla::aside">
+			
+		</div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<form th:action="@{/guardar}" method="post" th:object="${datos}">
+						<input type="hidden" th:field="*{datos.id}"/>
+						<label>Calle</label>
+						<input th:field="*{datos.calle}" />
+						<label>Codigo postal</label>
+						<input th:field="*{datos.codigo_postal}" />
+						<label>Colonia</label>
+						<input th:field="*{datos.colonia}" />
+						<label>Número exterior</label>
+						<input th:field="*{datos.numero_exterior}" />
+						<label>Número interior</label>
+						<input th:field="*{datos.numero_interior}" />
+					</form>
+				</main>
+				<br>
+			</div>
+			<footer th:replace="layout/plantilla::footer">
+					
+			</footer>
+		</div>
+	</div>
+
+<th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>
