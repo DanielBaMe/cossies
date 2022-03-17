@@ -9,8 +9,8 @@
 		<version>2.3.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cjm</groupId>
-	<artifactId>spf</artifactId>
+	<groupId>com.cossies</groupId>
+	<artifactId>sefin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>spf</name>
