@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="layout/plantilla::head">
+
+</head>
+<body class="sb-nav-fixed">
+	<header th:replace="layout/plantilla::header">
+	</header>
+	<div id="layoutSidenav">
+		<div th:replace="layout/plantilla::aside">
+			
+		</div>
+		<div id="layoutSidenav_content">
+			<div id="layoutAuthentication_content">
+				<main>
+					<div class="container-fluid">
+						<h1 class="mt-4">Formato de Expediente</h1>
+						<ol class="breadcrumb mb-4">
+							<li class="breadcrumb-item">Inicio</li>
+							<li class="breadcrumb-item active">Expediente</li>
+						</ol>
+
+						<div class="card-mb-4">
+							<div class="justify-content-center">
+								<div class="col-mb-4">
+									<div class="card shadow-lg border-0 rounded-lg mt-3">
+										<div class="card-header" id="prebodyHeader">
+											 <h3 class="text-center font-weight-light my-2" id="preHeader">Expediente</h3>
+										</div>
+										<div class="card-body">
+											<!-- <form method="post" th:action="@{/crearExpediente}"
+												th:object="${expediente}">-->
+												<form method="post" th:action="@{/registro_institucion}">
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="nombre" class="small mb-1">Nombre la
+																entrevistadora:</label><input
+																class="form-control form-control-sm" id="inputFirstName"
+																type="text" placeholder="Nombre"
+																name="nombre_entrevistador"/> <!-- <input
+																class="form-control form-control-sm" id="inputFirstName"
+																type="text" placeholder="Nombre"
+																name="nombre_entrevistador"
+																th:field="*{nombre_entrevistador}" required
+																pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="4" autocomplete="off" /> <small
+																th:if="${#fields.hasErrors('nombre_entrevistador')}" class="text-danger"
+																th:errors="*{nombre_entrevistador}">Error nombre</small> -->
+														</div>
+													</div>
+												</div>
+												<ol class="breadcrumb mb-4">
+													<li class="breadcrumb-item active">Formación
+														Educativa</li>
+												</ol>
+												<div class="form-row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="nombre" class="small mb-1">Nombre la
+																entrevistadora:</label><input
+																class="form-control form-control-sm" id="inputFirstName"
+																type="text" placeholder="Nombre"
+																name="nombre_entrevistador"/> <!-- <input
+																class="form-control form-control-sm" id="inputFirstName"
+																type="text" placeholder="Nombre"
+																name="nombre_entrevistador"
+																th:field="*{nombre_entrevistador}" required
+																pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="4" autocomplete="off" /> <small
+																th:if="${#fields.hasErrors('nombre_entrevistador')}" class="text-danger"
+																th:errors="*{nombre_entrevistador}">Error nombre</small> -->
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="nombre" class="small mb-1">Nombre la
+																entrevistadora:</label><input
+																class="form-control form-control-sm" id="inputFirstName"
+																type="text" placeholder="Nombre"
+																name="nombre_entrevistador"/> <!-- <input
+																class="form-control form-control-sm" id="inputFirstName"
+																type="text" placeholder="Nombre"
+																name="nombre_entrevistador"
+																th:field="*{nombre_entrevistador}" required
+																pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" minlength="4" autocomplete="off" /> <small
+																th:if="${#fields.hasErrors('nombre_entrevistador')}" class="text-danger"
+																th:errors="*{nombre_entrevistador}">Error nombre</small> -->
+														</div>
+													</div>
+												</div>
+											
+												<ol class="breadcrumb mb-2"></ol>
+												<div class="form-group mt-4 mb-0">
+													<button type="submit" class="btn btn-save btn-block">
+														<i class="fas fa-save"></i> Agregar
+													</button>
+													
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</main>
+				<br>
+			</div>
+			<footer th:replace="layout/plantilla::footer">
+				
+			</footer>
+		</div>
+	</div>
+	<th:block th:replace="layout/plantilla::script"></th:block>
+</body>
+</html>

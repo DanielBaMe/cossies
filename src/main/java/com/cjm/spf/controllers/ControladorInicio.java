@@ -141,7 +141,7 @@ public class ControladorInicio {
     
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user) {
-        String titulo = "Centro de Justicia para las Mujeres";
+        String titulo = "Sistma de Servicio Social";
         model.addAttribute("titulo", titulo);
         return "index";
     }
